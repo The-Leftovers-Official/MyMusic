@@ -21,11 +21,11 @@ public class MusicEntity {
     @Column(name = "Nome", columnDefinition = "TEXT")
     private String name;
 
-    @JoinColumn(name = "ArtistaId")
+
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private ArtistEntity artist;
 
-    @ManyToMany(mappedBy = "id", cascade = CascadeType.ALL)
+    @ManyToMany(cascade = CascadeType.ALL)
     private List<PlaylistEntity> playlist;
 
     public MusicEntity(String name, ArtistEntity artist) {

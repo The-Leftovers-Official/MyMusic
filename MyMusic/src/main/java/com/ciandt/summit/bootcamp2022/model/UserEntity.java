@@ -5,7 +5,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -18,19 +17,16 @@ public class UserEntity {
     @Column(name = "Id", nullable = false)
     private String id;
 
-    @Column(name = "Nome")
+    @Column(name = "Nome", columnDefinition = "TEXT")
     private String name;
 
     @JoinColumn(name = "PlaylistId")
-    @OneToMany(mappedBy = "id", cascade = CascadeType.ALL)
-    private List<PlaylistEntity> playlists;
+    @ManyToOne(optional = false)
+    private PlaylistEntity playlist;
 
     public UserEntity(String id, String name) {
         this.id = UUID.randomUUID().toString();;
         this.name = name;
     }
 
-    public void addPlaylists(PlaylistEntity playlist){
-        this.playlists.add(playlist);
-    }
 }
