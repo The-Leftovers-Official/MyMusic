@@ -4,6 +4,7 @@ package com.ciandt.summit.bootcamp2022.model;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -24,9 +25,16 @@ public class MusicEntity {
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private ArtistEntity artist;
 
+    @ManyToMany(mappedBy = "id", cascade = CascadeType.ALL)
+    private List<PlaylistEntity> playlist;
+
     public MusicEntity(String name, ArtistEntity artist) {
         this.id = UUID.randomUUID().toString();
         this.name = name;
         this.artist = artist;
+    }
+
+    public void addPlaylist(PlaylistEntity playlist){
+        this.playlist.add(playlist);
     }
 }
