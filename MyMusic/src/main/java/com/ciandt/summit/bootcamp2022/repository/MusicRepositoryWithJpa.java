@@ -8,10 +8,14 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public interface MusicRepositoryWithJpa extends JpaRepository<MusicEntity, String> {
 
-    @Query("SELECT m, a FROM MusicEntity m, ArtistEntity a WHERE lower(m.name) = :musicOrArtistName AND lower(a.name) = :musicOrArtistName")
-    Page<ArtistEntity> findMusicByFilter(@Param("name") String musicOrArtistName);
+    @Query("SELECT m, a FROM MusicEntity m, ArtistEntity a WHERE lower(m.name) = ?1 AND lower(a.name) = ?1")
+    Page<ArtistEntity> findMusicByFilter(String musicOrArtistName);
+
+
 
 }

@@ -1,6 +1,7 @@
 package com.ciandt.summit.bootcamp2022.model;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
@@ -21,6 +22,7 @@ public class MusicEntity {
     private String name;
 
     @JoinColumn(name = "ArtistaId")
+    @JsonIgnore
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private ArtistEntity artist;
 
