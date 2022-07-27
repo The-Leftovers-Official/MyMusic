@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.constraints.Min;
+import javax.validation.constraints.Size;
 import java.util.List;
 
 @RestController
@@ -28,8 +29,8 @@ public class MusicController {
 //    }
 
     @GetMapping
-    public ResponseEntity<List<MusicDto>> getMusicByNameOrArtist(@RequestParam(required = false) String filtro) {
-        List<MusicEntity> listOfMusic = musicRepositoryWithJpa.findByArtistNameContainingIgnoreCaseOrderByArtistNameAsc(filtro);
+    public ResponseEntity<List<MusicDto>> getMusicByNameOrArtist(@RequestParam(required = false) @Size(min = 2) String filtro) {
+        List<MusicEntity> listOfMusic = musicRepositoryWithJpa.findByNameContainingIgnoreCaseOrArtistNameContainingIgnoreCaseOrderByArtistNameAsc(filtro, filtro);
         return ResponseEntity.ok().body(MusicDto.converter(listOfMusic));
 
     }
