@@ -1,7 +1,9 @@
 package com.ciandt.summit.bootcamp2022.model;
 
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.UUID;
@@ -29,4 +31,5 @@ public class MusicEntity {
         this.name = name;
         this.artist = artist;
     }
+
 }
