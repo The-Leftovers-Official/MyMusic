@@ -1,0 +1,9 @@
+com/ciandt/summit/bootcamp2022/model/UserEntity.class
+com/ciandt/summit/bootcamp2022/SummitBootcampApplication.class
+com/ciandt/summit/bootcamp2022/config/SqliteConfig.class
+com/ciandt/summit/bootcamp2022/config/SqlDialect.class
+com/ciandt/summit/bootcamp2022/controller/MusicController.class
+com/ciandt/summit/bootcamp2022/model/MusicEntity.class
+com/ciandt/summit/bootcamp2022/model/ArtistEntity.class
+com/ciandt/summit/bootcamp2022/model/PlaylistEntity.class
+com/ciandt/summit/bootcamp2022/config/DbConfig.class

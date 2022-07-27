@@ -1,0 +1,8 @@
+/home/darasouza/Documentos/MyMusic/MyMusic/src/main/java/com/ciandt/summit/bootcamp2022/SummitBootcampApplication.java
+/home/darasouza/Documentos/MyMusic/MyMusic/src/main/java/com/ciandt/summit/bootcamp2022/model/PlaylistEntity.java
+/home/darasouza/Documentos/MyMusic/MyMusic/src/main/java/com/ciandt/summit/bootcamp2022/model/MusicEntity.java
+/home/darasouza/Documentos/MyMusic/MyMusic/src/main/java/com/ciandt/summit/bootcamp2022/model/UserEntity.java
+/home/darasouza/Documentos/MyMusic/MyMusic/src/main/java/com/ciandt/summit/bootcamp2022/model/ArtistEntity.java
+/home/darasouza/Documentos/MyMusic/MyMusic/src/main/java/com/ciandt/summit/bootcamp2022/config/DbConfig.java
+/home/darasouza/Documentos/MyMusic/MyMusic/src/main/java/com/ciandt/summit/bootcamp2022/controller/MusicController.java
+/home/darasouza/Documentos/MyMusic/MyMusic/src/main/java/com/ciandt/summit/bootcamp2022/config/SqlDialect.java

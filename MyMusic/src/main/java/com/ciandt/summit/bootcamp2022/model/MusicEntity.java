@@ -21,7 +21,6 @@ public class MusicEntity {
     @Column(name = "Nome", columnDefinition = "TEXT")
     private String name;
 
-
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private ArtistEntity artist;
 
