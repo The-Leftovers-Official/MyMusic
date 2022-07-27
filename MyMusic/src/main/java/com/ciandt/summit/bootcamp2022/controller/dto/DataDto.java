@@ -1,11 +1,12 @@
 package com.ciandt.summit.bootcamp2022.controller.dto;
 
 import com.ciandt.summit.bootcamp2022.model.MusicEntity;
+import lombok.Data;
 
-import javax.xml.crypto.Data;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Data
 public class DataDto {
 
   private List<MusicDto> data;

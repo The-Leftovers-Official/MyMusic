@@ -8,11 +8,12 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface MusicRepositoryWithJpa extends JpaRepository<MusicEntity, String> {
 
 
-    List<MusicEntity> findByNameContainingIgnoreCaseOrArtistNameContainingIgnoreCaseOrderByArtistNameAsc(String name, String musicName);
+    List<MusicEntity> findByNameContainingIgnoreCaseOrArtistNameContainingIgnoreCaseOrderByArtistNameAscName(String name, String musicName);
 
 }
