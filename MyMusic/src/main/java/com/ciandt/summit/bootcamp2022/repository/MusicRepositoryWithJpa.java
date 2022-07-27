@@ -1,5 +1,6 @@
 package com.ciandt.summit.bootcamp2022.repository;
 
+import com.ciandt.summit.bootcamp2022.controller.dto.MusicDto;
 import com.ciandt.summit.bootcamp2022.model.ArtistEntity;
 import com.ciandt.summit.bootcamp2022.model.MusicEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -12,6 +13,6 @@ import java.util.List;
 public interface MusicRepositoryWithJpa extends JpaRepository<MusicEntity, String> {
 
     @Query("SELECT m, a FROM MusicEntity m, ArtistEntity a WHERE lower(m.name) = :name AND lower(a.name) = :name")
-    List<ArtistEntity> findMusicBy(String name);
+    List<MusicEntity> findMusicBy(String name);
 
 }

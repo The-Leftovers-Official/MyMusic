@@ -1,6 +1,7 @@
 package com.ciandt.summit.bootcamp2022.model;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -23,7 +24,7 @@ public class MusicEntity {
     private String name;
 
     @JoinColumn(name = "ArtistaId")
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @ManyToOne
     private ArtistEntity artist;
 
     public MusicEntity(String name, ArtistEntity artist) {

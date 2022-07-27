@@ -24,18 +24,8 @@ public class ArtistEntity {
     @Column(name = "Nome", columnDefinition = "TEXT")
     private String name;
 
-    @OneToMany(mappedBy = "artist", cascade = CascadeType.ALL)
-    private List<MusicEntity> musics = new ArrayList<>();
-
-
     public ArtistEntity(String name) {
         this.id = UUID.randomUUID().toString();
-        ;
         this.name = name;
-    }
-
-    public void addMusic(MusicEntity music) {
-        music.setArtist(this);
-        this.musics.add(music);
     }
 }
