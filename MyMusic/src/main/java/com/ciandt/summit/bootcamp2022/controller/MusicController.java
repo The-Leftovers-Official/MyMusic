@@ -5,6 +5,7 @@ import com.ciandt.summit.bootcamp2022.controller.dto.MusicDto;
 import com.ciandt.summit.bootcamp2022.repository.MusicRepositoryWithJpa;
 import com.ciandt.summit.bootcamp2022.usecase.MusicService;
 import lombok.extern.log4j.Log4j2;
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,11 +31,8 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/v1/music")
 @Validated
-@Log4j2
+@Slf4j
 public class MusicController {
-
-
-    //private static final Logger logger = LoggerFactory.getLogger(MusicController.class);
 
     @Autowired
     private MusicService musicService;
@@ -47,11 +45,12 @@ public class MusicController {
               Pageable pageable = PageRequest.of(0, 10);
 
               if (filtro.isEmpty()) {
-                //logger.info("Teste de log");
+                log.info("Search without parameters accomplish.");
                 return ResponseEntity.ok().body(new ResponseWrapper(MusicDto.converter(musicService.getAllData(pageable))));
               }
 
               if (filtro.length() < 2) {
+                log.error("The filter parameter must be equal or greater than 2.");
                 throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "The filter parameter must be equal or greater than 2.");
               }
 
@@ -59,6 +58,7 @@ public class MusicController {
                       .getMusicByNameOrArtist(filtro, filtro, pageable));
 
               if (dataList.isEmpty()) {
+                log.warn("No data found.");
                 return new ResponseEntity<>(HttpStatus.NO_CONTENT);
               }
 
