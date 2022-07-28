@@ -1,13 +1,10 @@
 package com.ciandt.summit.bootcamp2022.controller.dto;
 
-import com.ciandt.summit.bootcamp2022.model.MusicEntity;
+import com.ciandt.summit.bootcamp2022.entity.MusicEntity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
-
-import java.util.List;
-import java.util.stream.Collectors;
+import org.springframework.data.domain.Page;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -27,8 +24,8 @@ public class MusicDto {
     this.artista = new ArtistDto(musicEntity.getArtist());
   }
 
-  public static List<MusicDto> converter(List<MusicEntity> musicEntity){
-    return musicEntity.stream().map(MusicDto::new).collect(Collectors.toList());
-  }
+    public static Page<MusicDto> converter(Page<MusicEntity> musicEntity) {
+      return musicEntity.map(MusicDto::new);
+    }
 
 }

@@ -1,6 +1,6 @@
 package com.ciandt.summit.bootcamp2022.controller.dto;
 
-import com.ciandt.summit.bootcamp2022.model.ArtistEntity;
+import com.ciandt.summit.bootcamp2022.entity.ArtistEntity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.Getter;

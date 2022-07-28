@@ -1,7 +1,6 @@
-package com.ciandt.summit.bootcamp2022.model;
+package com.ciandt.summit.bootcamp2022.entity;
 
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
