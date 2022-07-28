@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
-
+import org.springframework.cache.annotation.Cacheable;
 import java.util.List;
 
 @RestController
@@ -23,14 +23,9 @@ public class MusicController {
     @Autowired
     private MusicRepositoryWithJpa musicRepositoryWithJpa;
 
-//    @GetMapping
-//    public ResponseEntity<String> get() {
-//        return ResponseEntity.ok("67f5976c-eb1e-404e-8220-2c2a8a23be47");
-//    }
-
     @GetMapping
+    @Cacheable(value = "listOfMusicByNameOrArtist")
     public ResponseEntity<ResponseWrapper> getMusicByNameOrArtist(@RequestParam(required = false) String filtro) {
-
 
             if (filtro.isEmpty()) {
                 return ResponseEntity.ok().body(new ResponseWrapper(MusicDto.converter(musicRepositoryWithJpa.findAll())));
@@ -40,16 +35,14 @@ public class MusicController {
                 throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "The filter parameter must be equal or greater than 2.");
             }
 
-
             List<MusicDto> dataList = MusicDto.converter(musicRepositoryWithJpa
-                .findByNameContainingIgnoreCaseOrArtistNameContainingIgnoreCaseOrderByArtistNameAscName(filtro, filtro));
+                .findByNameContainingIgnoreCaseAndArtistNameContainingIgnoreCaseOrderByArtistNameAscName(filtro, filtro));
 
             if(dataList.isEmpty()){
                 return new ResponseEntity<>(HttpStatus.NO_CONTENT);
             }
 
             return ResponseEntity.ok().body(new ResponseWrapper(dataList));
-
 
     }
 
