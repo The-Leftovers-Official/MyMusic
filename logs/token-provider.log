@@ -1,0 +1,33 @@
+2022-07-25 11:35:00,010 INFO org.springframework.boot.StartupInfoLogger [main] Starting TokenProviderApplication using Java 11.0.15 on lnb035995cps with PID 54007 (/home/llabanca/MyMusic/TokenProvider/target/classes started by CIANDT\llabanca in /home/llabanca/MyMusic)
+2022-07-25 11:35:00,016 INFO org.springframework.boot.SpringApplication [main] No active profile set, falling back to default profiles: default
+2022-07-25 11:35:00,788 INFO org.springframework.boot.web.embedded.tomcat.TomcatWebServer [main] Tomcat initialized with port(s): 8080 (http)
+2022-07-25 11:35:00,793 INFO org.apache.juli.logging.DirectJDKLog [main] Initializing ProtocolHandler ["http-nio-8080"]
+2022-07-25 11:35:00,793 INFO org.apache.juli.logging.DirectJDKLog [main] Starting service [Tomcat]
+2022-07-25 11:35:00,793 INFO org.apache.juli.logging.DirectJDKLog [main] Starting Servlet engine: [Apache Tomcat/9.0.56]
+2022-07-25 11:35:00,823 INFO org.apache.juli.logging.DirectJDKLog [main] Initializing Spring embedded WebApplicationContext
+2022-07-25 11:35:00,823 INFO org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext [main] Root WebApplicationContext: initialization completed in 711 ms
+2022-07-25 11:35:01,123 INFO org.springframework.boot.actuate.endpoint.web.EndpointLinksResolver [main] Exposing 1 endpoint(s) beneath base path '/actuator'
+2022-07-25 11:35:01,137 INFO org.apache.juli.logging.DirectJDKLog [main] Starting ProtocolHandler ["http-nio-8080"]
+2022-07-25 11:35:01,149 INFO org.springframework.boot.web.embedded.tomcat.TomcatWebServer [main] Tomcat started on port(s): 8080 (http) with context path ''
+2022-07-25 11:35:01,161 INFO org.springframework.boot.StartupInfoLogger [main] Started TokenProviderApplication in 1.592 seconds (JVM running for 2.293)
+2022-07-25 11:35:01,287 INFO org.apache.juli.logging.DirectJDKLog [RMI TCP Connection(2)-127.0.0.1] Initializing Spring DispatcherServlet 'dispatcherServlet'
+2022-07-25 11:35:01,288 INFO org.springframework.web.servlet.FrameworkServlet [RMI TCP Connection(2)-127.0.0.1] Initializing Servlet 'dispatcherServlet'
+2022-07-25 11:35:01,289 INFO org.springframework.web.servlet.FrameworkServlet [RMI TCP Connection(2)-127.0.0.1] Completed initialization in 0 ms
+2022-07-25 11:35:34,487 WARN org.springframework.web.servlet.handler.AbstractHandlerExceptionResolver [http-nio-8080-exec-2] Resolved [org.springframework.web.HttpRequestMethodNotSupportedException: Request method 'GET' not supported]
+2022-07-25 11:37:41,040 WARN org.springframework.web.servlet.handler.AbstractHandlerExceptionResolver [http-nio-8080-exec-5] Resolved [org.springframework.web.HttpMediaTypeNotSupportedException: Content type '' not supported]
+2022-07-25 11:37:44,996 WARN org.springframework.web.servlet.handler.AbstractHandlerExceptionResolver [http-nio-8080-exec-6] Resolved [org.springframework.web.HttpRequestMethodNotSupportedException: Request method 'GET' not supported]
+2022-07-25 11:38:19,801 WARN org.springframework.web.servlet.handler.AbstractHandlerExceptionResolver [http-nio-8080-exec-7] Resolved [org.springframework.web.HttpRequestMethodNotSupportedException: Request method 'GET' not supported]
+2022-07-25 11:38:42,077 ERROR com.ciandt.token.provider.controllers.TokenController [http-nio-8080-exec-8] Erro na requisição: null
+2022-07-25 11:40:22,445 ERROR com.ciandt.token.provider.controllers.TokenController [http-nio-8080-exec-10] Erro na requisição: null
+2022-07-25 11:41:23,111 INFO com.ciandt.token.provider.controllers.TokenController [http-nio-8080-exec-2] Recebido requisição para criação de token para chave: Lari
+2022-07-25 11:41:23,168 INFO com.ciandt.token.provider.controllers.TokenController [http-nio-8080-exec-2] Token gerado com sucesso
+2022-07-25 11:42:38,388 INFO com.ciandt.token.provider.controllers.TokenAuthorizerController [http-nio-8080-exec-5] Recebido requisição para geração de token: Lari
+2022-07-25 11:42:38,390 ERROR com.ciandt.token.provider.controllers.TokenAuthorizerController [http-nio-8080-exec-5] Requisição inválida: Token expirado
+2022-07-25 11:43:41,446 INFO com.ciandt.token.provider.controllers.TokenAuthorizerController [http-nio-8080-exec-7] Recebido requisição para geração de token: Lari
+2022-07-25 11:43:41,448 ERROR com.ciandt.token.provider.controllers.TokenAuthorizerController [http-nio-8080-exec-7] Requisição inválida: Token expirado
+2022-07-25 11:44:00,871 INFO com.ciandt.token.provider.controllers.TokenAuthorizerController [http-nio-8080-exec-9] Recebido requisição para geração de token: Lari
+2022-07-25 11:44:00,872 ERROR com.ciandt.token.provider.controllers.TokenAuthorizerController [http-nio-8080-exec-9] Requisição inválida: Token expirado
+2022-07-25 11:44:24,446 INFO com.ciandt.token.provider.controllers.TokenController [http-nio-8080-exec-1] Recebido requisição para criação de token para chave: Lari
+2022-07-25 11:44:24,447 INFO com.ciandt.token.provider.controllers.TokenController [http-nio-8080-exec-1] Token gerado com sucesso
+2022-07-25 11:44:36,651 INFO com.ciandt.token.provider.controllers.TokenAuthorizerController [http-nio-8080-exec-2] Recebido requisição para geração de token: Lari
+2022-07-25 11:44:36,652 INFO com.ciandt.token.provider.controllers.TokenAuthorizerController [http-nio-8080-exec-2] Token validado com sucesso

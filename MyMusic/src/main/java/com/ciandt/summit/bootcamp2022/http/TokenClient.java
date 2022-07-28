@@ -1,5 +1,8 @@
 package com.ciandt.summit.bootcamp2022.http;
 
+import com.ciandt.summit.bootcamp2022.annotations.AllowAnnonymous;
+import com.ciandt.summit.bootcamp2022.http.dto.TokenAuthorizerRequestDto;
+import com.ciandt.summit.bootcamp2022.http.dto.TokenAuthorizerResponseDto;
 import com.ciandt.summit.bootcamp2022.http.dto.TokenRequestDto;
 import com.ciandt.summit.bootcamp2022.http.dto.TokenResponseDto;
 import org.springframework.cloud.openfeign.FeignClient;
@@ -8,9 +11,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 
-@FeignClient(url = "${tokenProvider.service.url}")
+@FeignClient(value = "${tokenProvider.service.url}")
 public interface TokenClient {
 
     @PostMapping("/api/v1/token")
-    ResponseEntity<TokenResponseDto> getToken(@RequestBody TokenRequestDto token);
+    String getToken(@RequestBody TokenRequestDto token);
+
+    @PostMapping("/api/v1/token/authorizer")
+    String getAuthorization(@RequestBody TokenAuthorizerRequestDto tokenCredentials);
 }
