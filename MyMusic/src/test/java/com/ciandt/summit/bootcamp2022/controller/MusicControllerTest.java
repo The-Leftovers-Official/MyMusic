@@ -21,13 +21,6 @@ public class MusicControllerTest {
   private MockMvc mockMvc;
 
   //TODO: Buscar + de 2 caracteres deve retornar Artista E Música
-
-  // TODO: Deve Retornar 204 caso não encontre
-
-  // TODO: Deve Retornar 400 caso envie apenas 1 caracter
-
-  // TODO: Busca deve vir ordenada pelo nome do artista e depois pelo nome da música
-
   @Test
   public void shouldReturnArtistAndMusicWhenParameterIsGreaterOrEqualTwo() throws Exception {
 
@@ -39,5 +32,49 @@ public class MusicControllerTest {
             .andExpect(status().isOk());
 
   }
+
+
+  // TODO: Deve Retornar 204 caso não encontre
+  @Test
+  public void shouldReturn204WhenNoDataIsFoundWithEspecifiedParameters() throws Exception {
+
+    String filtro = "asdasdasdasd";
+
+    mockMvc
+            .perform(get("/api/v1/music")
+                    .param("filtro", filtro))
+            .andExpect(status().isNoContent());
+
+  }
+
+  // TODO: Deve Retornar 400 caso envie apenas 1 caracter
+  @Test
+  public void shouldReturn400WhenParameterIsLessThan2Characters() throws Exception {
+
+    String filtro = "A";
+
+    mockMvc
+            .perform(get("/api/v1/music")
+                    .param("filtro", filtro))
+            .andExpect(status().isBadRequest());
+
+  }
+
+  // TODO: Deve Retornar todos os registros caso o filtro esteja vazio
+  @Test
+  public void shouldReturnAllDataWhenNoParameterIsPassed() throws Exception {
+
+    String filtro = "";
+
+    mockMvc
+            .perform(get("/api/v1/music")
+                    .param("filtro", filtro))
+            .andExpect(status().isOk());
+
+  }
+
+
+  // TODO: Busca deve vir ordenada pelo nome do artista e depois pelo nome da música
+
 
 }
