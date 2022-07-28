@@ -6,8 +6,7 @@ import com.ciandt.summit.bootcamp2022.http.dto.CreateTokenRequestDataDto;
 import com.ciandt.summit.bootcamp2022.http.dto.TokenAuthorizerRequestDto;
 import com.ciandt.summit.bootcamp2022.http.dto.TokenRequestDto;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import javax.servlet.FilterChain;
@@ -17,6 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 @RequiredArgsConstructor
+@Configuration
 public class AutenticacaoViaTokenFilter extends OncePerRequestFilter {
 
     private final TokenClient tokenClient;
@@ -27,7 +27,7 @@ public class AutenticacaoViaTokenFilter extends OncePerRequestFilter {
         String username1 = request.getHeader("Username");
 
         if (username1 == null)
-            throw new RuntimeException("Sem header");
+            throw new IllegalArgumentException("Username not valid");
 
 
         TokenRequestDto username = TokenRequestDto.builder()
@@ -51,7 +51,7 @@ public class AutenticacaoViaTokenFilter extends OncePerRequestFilter {
         String returnedAuthorization = tokenClient.getAuthorization(authorization).getBody();
 
         if (!returnedAuthorization.equals("ok"))
-            throw new RuntimeException("Sem autorizacao");
+            throw new IllegalArgumentException("Not authorized!");
 
     }
 }
