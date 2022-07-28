@@ -13,7 +13,6 @@ import java.util.Optional;
 @Repository
 public interface MusicRepositoryWithJpa extends JpaRepository<MusicEntity, String> {
 
-
-    List<MusicEntity> findByNameContainingIgnoreCaseOrArtistNameContainingIgnoreCaseOrderByArtistNameAscName(String name, String musicName);
+    List<MusicEntity> findByNameContainingIgnoreCaseAndArtistNameContainingIgnoreCaseOrderByArtistNameAscName(String name, String musicName);
 
 }
