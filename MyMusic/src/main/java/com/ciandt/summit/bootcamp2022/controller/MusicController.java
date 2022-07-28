@@ -1,10 +1,8 @@
 package com.ciandt.summit.bootcamp2022.controller;
 
-import com.ciandt.summit.bootcamp2022.controller.dto.DataDto;
+import com.ciandt.summit.bootcamp2022.controller.dto.ResponseWrapper;
 import com.ciandt.summit.bootcamp2022.controller.dto.MusicDto;
-import com.ciandt.summit.bootcamp2022.model.MusicEntity;
 import com.ciandt.summit.bootcamp2022.repository.MusicRepositoryWithJpa;
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,13 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
-import javax.validation.constraints.Min;
-import javax.validation.constraints.Size;
-import javax.xml.crypto.Data;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/v1/music")
@@ -37,11 +29,11 @@ public class MusicController {
 //    }
 
     @GetMapping
-    public ResponseEntity<List<MusicDto>> getMusicByNameOrArtist(@RequestParam(required = false) String filtro) {
+    public ResponseEntity<ResponseWrapper> getMusicByNameOrArtist(@RequestParam(required = false) String filtro) {
 
 
             if (filtro.isEmpty()) {
-                return ResponseEntity.ok().body(MusicDto.converter(musicRepositoryWithJpa.findAll()));
+                return ResponseEntity.ok().body(new ResponseWrapper(MusicDto.converter(musicRepositoryWithJpa.findAll())));
             }
 
             if (filtro.length() < 2) {
@@ -49,14 +41,14 @@ public class MusicController {
             }
 
 
-            List<MusicDto> musicList = MusicDto.converter(musicRepositoryWithJpa
+            List<MusicDto> dataList = MusicDto.converter(musicRepositoryWithJpa
                 .findByNameContainingIgnoreCaseOrArtistNameContainingIgnoreCaseOrderByArtistNameAscName(filtro, filtro));
 
-            if(musicList.isEmpty()){
+            if(dataList.isEmpty()){
                 return new ResponseEntity<>(HttpStatus.NO_CONTENT);
             }
 
-            return ResponseEntity.ok().body(musicList);
+            return ResponseEntity.ok().body(new ResponseWrapper(dataList));
 
 
     }

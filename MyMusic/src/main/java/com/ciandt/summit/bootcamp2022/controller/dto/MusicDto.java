@@ -14,9 +14,12 @@ import java.util.stream.Collectors;
 @Data
 public class MusicDto {
 
+
   private String id;
   private String nome;
   private ArtistDto artista;
+
+
 
   public MusicDto(MusicEntity musicEntity){
     this.id = musicEntity.getId();
