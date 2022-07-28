@@ -1,10 +1,11 @@
 package com.ciandt.summit.bootcamp2022.model;
 
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -21,11 +22,9 @@ public class MusicEntity {
     @Column(name = "Nome", columnDefinition = "TEXT")
     private String name;
 
+    @JoinColumn(name = "ArtistaId")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private ArtistEntity artist;
-
-    @ManyToMany(cascade = CascadeType.ALL)
-    private List<PlaylistEntity> playlist;
 
     public MusicEntity(String name, ArtistEntity artist) {
         this.id = UUID.randomUUID().toString();
@@ -33,7 +32,4 @@ public class MusicEntity {
         this.artist = artist;
     }
 
-    public void addPlaylist(PlaylistEntity playlist){
-        this.playlist.add(playlist);
-    }
 }

@@ -1,7 +1,9 @@
 package com.ciandt.summit.bootcamp2022.model;
 
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -27,11 +29,12 @@ public class ArtistEntity {
 
 
     public ArtistEntity(String name) {
-        this.id = UUID.randomUUID().toString();;
+        this.id = UUID.randomUUID().toString();
+        ;
         this.name = name;
     }
 
-    public void addMusic(MusicEntity music){
+    public void addMusic(MusicEntity music) {
         music.setArtist(this);
         this.musics.add(music);
     }
