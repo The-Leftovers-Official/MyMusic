@@ -23,7 +23,7 @@ public class MusicEntity {
     private String name;
 
     @JoinColumn(name = "ArtistaId")
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @ManyToOne
     private ArtistEntity artist;
 
     public MusicEntity(String name, ArtistEntity artist) {
