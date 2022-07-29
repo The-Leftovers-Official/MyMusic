@@ -12,4 +12,6 @@ public interface MusicRepositoryWithJpa extends PagingAndSortingRepository<Music
 
     Page<MusicEntity> findByNameContainingIgnoreCaseOrArtistNameContainingIgnoreCaseOrderByArtistNameAscName(String name, String musicName, Pageable pageable);
 
+    Page<MusicEntity> findAllByOrderByArtistNameAscName(Pageable pageable);
+
 }
