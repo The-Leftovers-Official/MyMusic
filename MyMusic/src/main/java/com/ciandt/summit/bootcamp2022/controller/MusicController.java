@@ -32,12 +32,13 @@ public class MusicController {
     @GetMapping
     @Cacheable(value = "listOfMusicByNameOrArtist")
     public ResponseEntity<ResponseWrapper> getMusicByNameOrArtist(@RequestParam(required = false) String filtro,
-                                                                  @PageableDefault(page = 0, size = 30) Pageable pageable,
+                                                                  @PageableDefault(page = 0) Pageable pageable,
                                                                   @RequestHeader("Username") String username) {
 
         tokenAuthorizedClient.isAuthorized(username);
 
-        if (filtro.isEmpty()) {
+
+        if (filtro == null || filtro.isEmpty()) {
             log.info("Search without parameters accomplish.");
             return ResponseEntity.ok().body(new ResponseWrapper(MusicDto.converter(musicService.getAllData(pageable))));
         }
