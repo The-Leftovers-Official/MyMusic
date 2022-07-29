@@ -26,10 +26,7 @@ public class TokenAuthorizedClientUtils {
                     .data(CreateAuthorizerRequestData.builder().name(username).token(token).build())
                     .build();
 
-            String returnedAuthorization = tokenAuthorizedClient.getAuthorization(authorization).getBody();
-
-            if (!returnedAuthorization.equals("ok"))
-                throw new IllegalArgumentException("Not authorized!");
+            tokenAuthorizedClient.getAuthorization(authorization);
 
         } catch (RuntimeException err){
             throw new AuthorizedHandler.TokenServiceException();
