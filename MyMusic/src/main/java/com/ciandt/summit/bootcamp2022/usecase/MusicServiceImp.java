@@ -21,7 +21,7 @@ public class MusicServiceImp implements MusicService{
 
   @Override
   public Page<MusicEntity> getAllData(Pageable pageable) {
-    return musicRepositoryWithJpa.findAll(pageable);
+    return musicRepositoryWithJpa.findAllByOrderByArtistNameAscName(pageable);
   }
 
 
