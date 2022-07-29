@@ -8,14 +8,13 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
-
 
 
 @RestController
@@ -33,11 +32,10 @@ public class MusicController {
     @GetMapping
     @Cacheable(value = "listOfMusicByNameOrArtist")
     public ResponseEntity<ResponseWrapper> getMusicByNameOrArtist(@RequestParam(required = false) String filtro,
-                @RequestHeader("Username") String username) {
+                                                                  @PageableDefault(page = 0, size = 30) Pageable pageable,
+                                                                  @RequestHeader("Username") String username) {
 
         tokenAuthorizedClient.isAuthorized(username);
-
-        Pageable pageable = PageRequest.of(0, 10);
 
         if (filtro.isEmpty()) {
             log.info("Search without parameters accomplish.");
