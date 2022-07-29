@@ -2,7 +2,6 @@ package com.ciandt.summit.bootcamp2022.usecase;
 
 import com.ciandt.summit.bootcamp2022.entity.MusicEntity;
 import org.springframework.data.domain.Page;
-
 import org.springframework.data.domain.Pageable;
 
 public interface MusicService {
