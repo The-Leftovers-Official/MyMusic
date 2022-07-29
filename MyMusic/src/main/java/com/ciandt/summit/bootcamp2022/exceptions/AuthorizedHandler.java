@@ -31,6 +31,14 @@ public class AuthorizedHandler extends ResponseEntityExceptionHandler {
         }
     }
 
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    public static class TokenServiceException extends RuntimeException {
+
+        public TokenServiceException() {
+            super("Token Service not working! ");
+        }
+    }
+
 
     @ExceptionHandler(value = {
             MissingRequestHeaderException.class,
@@ -39,6 +47,15 @@ public class AuthorizedHandler extends ResponseEntityExceptionHandler {
     protected ResponseEntity<Object> handleRequestHeaderException(Exception ex) {
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(ErrorResponse.builder()
                 .status(String.valueOf(HttpStatus.UNAUTHORIZED.value()))
+                .reason(ex.getMessage()).build());
+    }
+
+    @ExceptionHandler(value = {
+            TokenServiceException.class
+    })
+    protected ResponseEntity<Object> handleTokenServiceException(Exception ex) {
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(ErrorResponse.builder()
+                .status(String.valueOf(HttpStatus.INTERNAL_SERVER_ERROR.value()))
                 .reason(ex.getMessage()).build());
     }
 

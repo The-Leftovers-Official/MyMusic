@@ -23,30 +23,31 @@ public class MusicController {
     @GetMapping
     public ResponseEntity<String> get(@RequestHeader("Username") String username) {
 
-        if (username == "")
-            throw new AuthorizedHandler.InvalidRequestHeaderException();
-
-        Boolean authorized = isAuthorized(username);
+        isAuthorized(username);
 
         return ResponseEntity.ok().build();
     }
 
-    private Boolean isAuthorized(String username) {
+    private void isAuthorized(String username) {
 
-        TokenRequestDto userName = TokenRequestDto.builder()
-                .data(CreateTokenRequestDataDto.builder().name(username).build())
-                .build();
-        String token = tokenClient.getToken(userName).getBody();
+        try{
 
-        TokenAuthorizerRequestDto authorization = TokenAuthorizerRequestDto.builder()
-                .data(CreateAuthorizerRequestData.builder().name(username).token(token).build())
-                        .build();
+            TokenRequestDto userName = TokenRequestDto.builder()
+                    .data(CreateTokenRequestDataDto.builder().name(username).build())
+                    .build();
+            String token = tokenClient.getToken(userName).getBody();
 
-        String returnedAuthorization = tokenClient.getAuthorization(authorization).getBody();
+            TokenAuthorizerRequestDto authorization = TokenAuthorizerRequestDto.builder()
+                    .data(CreateAuthorizerRequestData.builder().name(username).token(token).build())
+                    .build();
 
-        if (!returnedAuthorization.equals("ok"))
-            throw new IllegalArgumentException("Not authorized!");
+            String returnedAuthorization = tokenClient.getAuthorization(authorization).getBody();
 
-        return true;
+            if (!returnedAuthorization.equals("ok"))
+                throw new IllegalArgumentException("Not authorized!");
+
+        } catch (RuntimeException err){
+            throw new AuthorizedHandler.TokenServiceException();
+        }
     }
 }
