@@ -3,7 +3,7 @@ package com.ciandt.summit.bootcamp2022.controller;
 import com.ciandt.summit.bootcamp2022.controller.dto.MusicDto;
 import com.ciandt.summit.bootcamp2022.controller.dto.ResponseWrapper;
 import com.ciandt.summit.bootcamp2022.usecase.MusicService;
-import lombok.extern.log4j.Log4j2;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;

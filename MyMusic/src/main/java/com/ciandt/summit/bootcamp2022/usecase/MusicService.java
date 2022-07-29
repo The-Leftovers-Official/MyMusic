@@ -10,6 +10,4 @@ public interface MusicService {
 
   Page<MusicEntity> getAllData(Pageable pageable);
 
-
-
 }

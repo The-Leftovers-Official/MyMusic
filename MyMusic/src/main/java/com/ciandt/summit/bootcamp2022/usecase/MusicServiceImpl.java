@@ -8,7 +8,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 @Service
-public class MusicServiceImp implements MusicService{
+public class MusicServiceImpl implements MusicService{
 
   @Autowired
   private MusicRepositoryWithJpa musicRepositoryWithJpa;

@@ -20,9 +20,6 @@ public class MusicControllerTest {
   @Autowired
   private MockMvc mockMvc;
 
-  @Autowired
-  private MusicRepositoryWithJpa musicRepositoryWithJpa;
-
   public static final String urlTemplate = "/api/v1/music";
 
   @Test
@@ -70,8 +67,10 @@ public class MusicControllerTest {
     mockMvc
             .perform(get(urlTemplate)
                     .param("filtro", filtro))
-            .andExpect(status().isOk());
+            .andExpect(status().isOk())
+            .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+            .andExpect(jsonPath("$.length()").isNotEmpty())
+            .andExpect(jsonPath("$.data.content[0].artista.nome").value("A-Ha"))
+            .andExpect(jsonPath("$.data.totalElements").value(33573));
 
-  }
-
-}
+  }}
