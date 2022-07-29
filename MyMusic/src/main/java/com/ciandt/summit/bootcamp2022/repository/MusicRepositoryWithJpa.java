@@ -1,7 +1,7 @@
 package com.ciandt.summit.bootcamp2022.repository;
 
-import com.ciandt.summit.bootcamp2022.model.ArtistEntity;
-import com.ciandt.summit.bootcamp2022.model.MusicEntity;
+import com.ciandt.summit.bootcamp2022.entity.ArtistEntity;
+import com.ciandt.summit.bootcamp2022.entity.MusicEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
