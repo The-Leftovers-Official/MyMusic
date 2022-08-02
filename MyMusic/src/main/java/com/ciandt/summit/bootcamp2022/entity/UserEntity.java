@@ -1,4 +1,4 @@
-package com.ciandt.summit.bootcamp2022.model;
+package com.ciandt.summit.bootcamp2022.entity;
 
 
 import lombok.Data;
@@ -25,7 +25,8 @@ public class UserEntity {
     private PlaylistEntity playlist;
 
     public UserEntity(String id, String name) {
-        this.id = UUID.randomUUID().toString();;
+        this.id = UUID.randomUUID().toString();
+        ;
         this.name = name;
     }
 
