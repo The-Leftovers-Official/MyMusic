@@ -1,5 +1,6 @@
 package com.ciandt.summit.bootcamp2022.infra.entity;
 
+import com.ciandt.summit.bootcamp2022.entity.PlaylistMusics;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -27,4 +28,9 @@ public class PlaylistMusicas {
     @JoinColumn(name = "MusicaId")
     MusicEntity music;
 
+    public PlaylistMusicas(PlaylistMusics playlistMusics) {
+        //this.id = playlistMusics.getId();
+        this.playlist = playlist;
+        this.music = music;
+    }
 }

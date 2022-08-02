@@ -1,7 +1,9 @@
 package com.ciandt.summit.bootcamp2022.infra.entity;
 
 
+import com.ciandt.summit.bootcamp2022.entity.Artist;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -11,6 +13,7 @@ import java.util.UUID;
 @Entity
 @Table(name = "Artistas")
 @Data
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class ArtistEntity {
@@ -25,5 +28,10 @@ public class ArtistEntity {
     public ArtistEntity(String name) {
         this.id = UUID.randomUUID().toString();
         this.name = name;
+    }
+
+    public ArtistEntity(Artist artist) {
+        this.id = artist.getId();
+        this.name = artist.getName();
     }
 }
