@@ -1,6 +1,7 @@
-package com.ciandt.summit.bootcamp2022.entity;
+package com.ciandt.summit.bootcamp2022.infra.entity;
 
 
+import com.ciandt.summit.bootcamp2022.infra.entity.PlaylistEntity;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -26,7 +27,6 @@ public class UserEntity {
 
     public UserEntity(String id, String name) {
         this.id = UUID.randomUUID().toString();
-        ;
         this.name = name;
     }
 

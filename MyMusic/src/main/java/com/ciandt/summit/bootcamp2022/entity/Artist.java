@@ -1,29 +1,24 @@
 package com.ciandt.summit.bootcamp2022.entity;
 
-
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.*;
 import java.util.UUID;
 
-@Entity
-@Table(name = "Artistas")
-@Data
-@NoArgsConstructor
 @AllArgsConstructor
-public class ArtistEntity {
-
-    @Id
-    @Column(name = "Id", nullable = false)
+@NoArgsConstructor
+@Builder
+@Data
+public class Artist {
     private String id;
 
-    @Column(name = "Nome", columnDefinition = "TEXT")
     private String name;
 
-    public ArtistEntity(String name) {
+    public Artist(String name) {
         this.id = UUID.randomUUID().toString();
         this.name = name;
     }
+
 }

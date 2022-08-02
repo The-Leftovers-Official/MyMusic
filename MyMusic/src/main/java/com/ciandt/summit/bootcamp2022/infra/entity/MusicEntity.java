@@ -1,4 +1,4 @@
-package com.ciandt.summit.bootcamp2022.entity;
+package com.ciandt.summit.bootcamp2022.infra.entity;
 
 
 import lombok.AllArgsConstructor;
@@ -29,7 +29,7 @@ public class MusicEntity {
     private ArtistEntity artist;
 
     @OneToMany(mappedBy = "playlist")
-    private List<PlaylistMusics> playlists = new ArrayList<>();
+    private List<PlaylistMusicsEntity> playlists = new ArrayList<>();
 
     public MusicEntity(String name, ArtistEntity artist) {
         this.id = UUID.randomUUID().toString();
@@ -38,7 +38,7 @@ public class MusicEntity {
     }
 
     public void addIntoPlaylist(PlaylistEntity playlist) {
-        PlaylistMusics newPlaylist = PlaylistMusics.builder().music(this)
+        PlaylistMusicsEntity newPlaylist = PlaylistMusicsEntity.builder().music(this)
                 .playlist(playlist)
                 .build();
 

@@ -5,26 +5,15 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.*;
-
-@Builder
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 @Data
-@Entity
 public class PlaylistMusics {
 
-    @EmbeddedId
     PlaylistMusicsPK id;
 
-    @ManyToOne
-    @MapsId("playlistId")
-    @JoinColumn(name = "PlaylistId")
-    PlaylistEntity playlist;
+    Playlist playlist;
 
-    @ManyToOne
-    @MapsId("musicId")
-    @JoinColumn(name = "MusicaId")
-    MusicEntity music;
-
+    Music music;
 }
