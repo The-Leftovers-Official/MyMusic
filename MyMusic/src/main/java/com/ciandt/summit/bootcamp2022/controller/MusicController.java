@@ -2,9 +2,11 @@ package com.ciandt.summit.bootcamp2022.controller;
 
 import com.ciandt.summit.bootcamp2022.controller.dto.MusicDto;
 import com.ciandt.summit.bootcamp2022.controller.dto.ResponseWrapper;
+import com.ciandt.summit.bootcamp2022.entity.MusicEntity;
 import com.ciandt.summit.bootcamp2022.http.TokenAuthorizedClientUtils;
 import com.ciandt.summit.bootcamp2022.usecase.MusicService;
 import lombok.extern.slf4j.Slf4j;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
@@ -17,6 +19,8 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.List;
+import java.util.stream.Collectors;
 
 
 @RestController
@@ -31,10 +35,11 @@ public class MusicController {
     @Autowired
     private TokenAuthorizedClientUtils tokenAuthorizedClient;
 
+
     @GetMapping
     @Cacheable(value = "listOfMusicByNameOrArtist")
     public ResponseEntity<ResponseWrapper> getMusicByNameOrArtist(@RequestParam(required = false) String filtro,
-                                                                  @PageableDefault(page = 0, size = 30) Pageable pageable,
+                                                                  @PageableDefault(page = 0) Pageable pageable,
                                                                   @RequestHeader("Username") String username) {
 
         tokenAuthorizedClient.isAuthorized(username);
@@ -47,11 +52,12 @@ public class MusicController {
 
         if (filtro.length() < 2) {
             log.error("The filter parameter must be equal or greater than 2.");
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "The filter parameter must be equal or greater than 2.");
+            throw new IllegalArgumentException( "The filter parameter must be equal or greater than 2.");
         }
 
-        Page<MusicDto> dataList = MusicDto.converter(musicService
-                .getMusicByNameOrArtist(filtro, filtro, pageable));
+        Page<MusicEntity> musicEntityPage = musicService.getMusicByNameOrArtist(filtro, filtro, pageable);
+
+        Page<MusicDto> dataList = MusicDto.converter(musicEntityPage);
 
         if (dataList.isEmpty()) {
             log.warn("No data found.");

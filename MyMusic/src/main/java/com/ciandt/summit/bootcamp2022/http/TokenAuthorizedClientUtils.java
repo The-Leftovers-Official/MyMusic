@@ -6,6 +6,7 @@ import com.ciandt.summit.bootcamp2022.http.dto.CreateTokenRequestDataDto;
 import com.ciandt.summit.bootcamp2022.http.dto.TokenAuthorizerRequestDto;
 import com.ciandt.summit.bootcamp2022.http.dto.TokenRequestDto;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 @Service

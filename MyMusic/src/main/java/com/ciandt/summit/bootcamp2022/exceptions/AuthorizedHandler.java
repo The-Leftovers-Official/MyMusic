@@ -17,7 +17,7 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 public class AuthorizedHandler extends ResponseEntityExceptionHandler {
 
 
-    @ResponseStatus(code = HttpStatus.UNAUTHORIZED)
+    @ResponseStatus(code = HttpStatus.BAD_REQUEST)
     @ExceptionHandler(IllegalArgumentException.class)
     private ValidationErrorDto handle(IllegalArgumentException exception){
         return ValidationErrorDto.builder().message(exception.getMessage()).build();
