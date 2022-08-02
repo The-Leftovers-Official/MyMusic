@@ -22,7 +22,7 @@ public class DbConfig {
     public DataSource dataSource() {
         final DriverManagerDataSource dataSource = new DriverManagerDataSource();
         dataSource.setDriverClassName("org.sqlite.JDBC");
-        dataSource.setUrl("jdbc:sqlite:MyMusic.db");
+        dataSource.setUrl("jdbc:sqlite:MyMusicTest.db");
         dataSource.setUsername(env.getProperty(""));
         dataSource.setPassword(env.getProperty(""));
         return dataSource;

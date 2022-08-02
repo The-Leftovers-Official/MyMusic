@@ -6,6 +6,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -25,6 +27,9 @@ public class MusicEntity {
     @JoinColumn(name = "ArtistaId")
     @ManyToOne
     private ArtistEntity artist;
+
+    @ManyToMany(mappedBy = "musics")
+    private List<PlaylistEntity> playlists = new ArrayList<>();
 
     public MusicEntity(String name, ArtistEntity artist) {
         this.id = UUID.randomUUID().toString();
