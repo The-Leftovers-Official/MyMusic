@@ -12,7 +12,7 @@ import javax.persistence.*;
 @NoArgsConstructor
 @Data
 @Entity
-public class PlaylistMusicsEntity {
+public class PlaylistMusicas {
 
     @EmbeddedId
     PlaylistMusicsPKEntity id;

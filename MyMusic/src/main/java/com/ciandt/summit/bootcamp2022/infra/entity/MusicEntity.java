@@ -29,7 +29,7 @@ public class MusicEntity {
     private ArtistEntity artist;
 
     @OneToMany(mappedBy = "playlist")
-    private List<PlaylistMusicsEntity> playlists = new ArrayList<>();
+    private List<PlaylistMusicas> playlists = new ArrayList<>();
 
     public MusicEntity(String name, ArtistEntity artist) {
         this.id = UUID.randomUUID().toString();
@@ -38,7 +38,7 @@ public class MusicEntity {
     }
 
     public void addIntoPlaylist(PlaylistEntity playlist) {
-        PlaylistMusicsEntity newPlaylist = PlaylistMusicsEntity.builder().music(this)
+        PlaylistMusicas newPlaylist = PlaylistMusicas.builder().music(this)
                 .playlist(playlist)
                 .build();
 

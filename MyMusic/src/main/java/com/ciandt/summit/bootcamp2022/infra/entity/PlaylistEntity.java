@@ -18,14 +18,14 @@ public class PlaylistEntity {
     private String id;
 
     @OneToMany(mappedBy = "music", cascade = CascadeType.ALL)
-    private List<PlaylistMusicsEntity> musics = new ArrayList<>();
+    private List<PlaylistMusicas> musics = new ArrayList<>();
 
     public PlaylistEntity() {
         this.id = UUID.randomUUID().toString();
     }
 
     public void addMusics(MusicEntity music) {
-        PlaylistMusicsEntity musics = PlaylistMusicsEntity.builder().playlist(this)
+        PlaylistMusicas musics = PlaylistMusicas.builder().playlist(this)
                 .music(music)
                 .build();
 
