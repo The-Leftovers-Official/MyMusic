@@ -6,6 +6,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -26,10 +28,21 @@ public class MusicEntity {
     @ManyToOne
     private ArtistEntity artist;
 
+    @OneToMany(mappedBy = "playlist")
+    private List<PlaylistMusics> playlists = new ArrayList<>();
+
     public MusicEntity(String name, ArtistEntity artist) {
         this.id = UUID.randomUUID().toString();
         this.name = name;
         this.artist = artist;
+    }
+
+    public void addIntoPlaylist(PlaylistEntity playlist) {
+        PlaylistMusics newPlaylist = PlaylistMusics.builder().music(this)
+                .playlist(playlist)
+                .build();
+
+        this.playlists.add(newPlaylist);
     }
 
 }
