@@ -17,17 +17,19 @@ public class PlaylistEntity {
     @Column(name = "Id", nullable = false)
     private String id;
 
-    @OneToMany(mappedBy = "music")
+    @OneToMany(mappedBy = "music", cascade = CascadeType.ALL)
     private List<PlaylistMusics> musics = new ArrayList<>();
 
     public PlaylistEntity() {
         this.id = UUID.randomUUID().toString();
     }
 
-    public List<MusicEntity> addMusics(MusicEntity music) {
-        PlaylistMusics playlistMusics = PlaylistMusics.builder().build();
-        //this.musics.add(music);
+    public void addMusics(MusicEntity music) {
+        PlaylistMusics musics = PlaylistMusics.builder().playlist(this)
+                .music(music)
+                .build();
 
-        return null;
+        this.musics.add(musics);
+
     }
 }

@@ -37,8 +37,12 @@ public class MusicEntity {
         this.artist = artist;
     }
 
-    public List<PlaylistEntity> addIntoPlaylist(PlaylistEntity playlist) {
-        this.playlists.add(playlist);
+    public void addIntoPlaylist(PlaylistEntity playlist) {
+        PlaylistMusics newPlaylist = PlaylistMusics.builder().music(this)
+                .playlist(playlist)
+                .build();
+
+        this.playlists.add(newPlaylist);
     }
 
 }
