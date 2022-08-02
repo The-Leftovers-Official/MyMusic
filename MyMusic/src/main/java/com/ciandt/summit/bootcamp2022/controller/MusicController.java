@@ -2,7 +2,7 @@ package com.ciandt.summit.bootcamp2022.controller;
 
 import com.ciandt.summit.bootcamp2022.controller.dto.MusicDto;
 import com.ciandt.summit.bootcamp2022.controller.dto.ResponseWrapper;
-import com.ciandt.summit.bootcamp2022.entity.MusicEntity;
+import com.ciandt.summit.bootcamp2022.infra.entity.MusicEntity;
 import com.ciandt.summit.bootcamp2022.http.TokenAuthorizedClientUtils;
 import com.ciandt.summit.bootcamp2022.usecase.MusicService;
 import lombok.extern.slf4j.Slf4j;
