@@ -12,8 +12,8 @@
 //
 //    @Override
 //    public PlaylistEntity addMusic(MusicEntity music) {
-//        PlaylistEntity playlistr = playlist.addMusic(music);
+//        PlaylistEntity playlistEntity = playlist.addMusic(music.);
 //
-//        return playlistr;
+//        return playlistEntity;
 //    }
 //}
