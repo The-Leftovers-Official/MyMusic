@@ -28,13 +28,17 @@ public class MusicEntity {
     @ManyToOne
     private ArtistEntity artist;
 
-    @ManyToMany(mappedBy = "musics")
-    private List<PlaylistEntity> playlists = new ArrayList<>();
+    @OneToMany(mappedBy = "playlist")
+    private List<PlaylistMusics> playlists = new ArrayList<>();
 
     public MusicEntity(String name, ArtistEntity artist) {
         this.id = UUID.randomUUID().toString();
         this.name = name;
         this.artist = artist;
+    }
+
+    public List<PlaylistEntity> addIntoPlaylist(PlaylistEntity playlist) {
+        this.playlists.add(playlist);
     }
 
 }

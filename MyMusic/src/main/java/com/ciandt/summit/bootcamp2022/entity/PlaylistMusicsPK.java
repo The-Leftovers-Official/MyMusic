@@ -1,0 +1,23 @@
+package com.ciandt.summit.bootcamp2022.entity;
+
+import lombok.*;
+
+import javax.persistence.Column;
+import javax.persistence.Embeddable;
+import java.io.Serializable;
+
+@Builder
+@EqualsAndHashCode
+@NoArgsConstructor
+@AllArgsConstructor
+@Data
+@Embeddable
+public class PlaylistMusicsPK implements Serializable {
+
+    @Column(name = "PlaylistId")
+    private String playlistId;
+
+    @Column(name = "MusicaId")
+    private String musicId;
+
+}

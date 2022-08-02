@@ -17,14 +17,17 @@ public class PlaylistEntity {
     @Column(name = "Id", nullable = false)
     private String id;
 
-    @ManyToMany
-    @JoinTable(
-            name = "PlaylistMusicas",
-            joinColumns = @JoinColumn(name = "PlaylistId"),
-            inverseJoinColumns = @JoinColumn(name = "MusicaId"))
-    private List<MusicEntity> musics = new ArrayList<>();
+    @OneToMany(mappedBy = "music")
+    private List<PlaylistMusics> musics = new ArrayList<>();
 
     public PlaylistEntity() {
         this.id = UUID.randomUUID().toString();
+    }
+
+    public List<MusicEntity> addMusics(MusicEntity music) {
+        PlaylistMusics playlistMusics = PlaylistMusics.builder().build();
+        //this.musics.add(music);
+
+        return null;
     }
 }
