@@ -8,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
 import java.util.Optional;
 
 @Component
@@ -17,6 +18,11 @@ public class PlaylistRepositoryImpl implements PlaylistRepository {
 
     private final PlaylistRepositoryWithJpa playlistRepositoryWithJpa;
     private final MusicRepositoryWithJpa musicRepositoryWithJpa;
+
+  @Override
+  public List<Music> addMusics(String playlistId, List<Music> convertIntoListMusic) {
+    return null;
+  }
 
   @Override
   public Music addMusic(String playlistId, Music music) {
@@ -32,7 +38,7 @@ public class PlaylistRepositoryImpl implements PlaylistRepository {
 
     MusicEntity musicEntity1 = new MusicEntity(music);
     playlistEntity.get().addMusics(musicEntity1);
-    log.info("Musics added successfully!");
+    log.info(musicEntity1.getArtist().getName() + " - " + musicEntity1.getName() + " added successfully!");
 
     return music;
   }

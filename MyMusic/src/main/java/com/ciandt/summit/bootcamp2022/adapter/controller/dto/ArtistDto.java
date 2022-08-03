@@ -13,11 +13,11 @@ import lombok.NoArgsConstructor;
 public class ArtistDto {
 
   private String id;
-  private String nome;
+  private String name;
 
   public ArtistDto(ArtistEntity artistEntity){
     this.id = artistEntity.getId();
-    this.nome = artistEntity.getName();
+    this.name = artistEntity.getName();
   }
 
 }

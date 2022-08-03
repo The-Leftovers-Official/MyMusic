@@ -24,6 +24,7 @@ public class Music {
         this.id = UUID.randomUUID().toString();
         this.name = name;
         this.artist = artist;
+        this.playlists = new ArrayList<>();
     }
 
     public void addIntoPlaylist(Playlist playlist) {
