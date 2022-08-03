@@ -1,6 +1,7 @@
 package com.ciandt.summit.bootcamp2022.infra.entity;
 
 
+import com.ciandt.summit.bootcamp2022.entity.Playlist;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -31,5 +32,9 @@ public class PlaylistEntity {
 
         this.musics.add(musics);
 
+    }
+
+    public PlaylistEntity(Playlist playlist) {
+        this.id = playlist.getId();
     }
 }
