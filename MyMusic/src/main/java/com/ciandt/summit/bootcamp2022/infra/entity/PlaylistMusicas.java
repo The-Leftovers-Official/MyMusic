@@ -29,7 +29,6 @@ public class PlaylistMusicas {
     MusicEntity music;
 
     public PlaylistMusicas(PlaylistMusics playlistMusics) {
-        //this.id = playlistMusics.getId();
         this.playlist = playlist;
         this.music = music;
     }

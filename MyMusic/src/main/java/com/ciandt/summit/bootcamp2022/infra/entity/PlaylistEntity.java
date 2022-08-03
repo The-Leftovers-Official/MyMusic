@@ -36,6 +36,5 @@ public class PlaylistEntity {
 
     public PlaylistEntity(Playlist playlist) {
         this.id = playlist.getId();
-        //this.musics = playlist;
     }
 }

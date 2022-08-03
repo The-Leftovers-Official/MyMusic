@@ -2,7 +2,6 @@ package com.ciandt.summit.bootcamp2022.infra.entity;
 
 
 import com.ciandt.summit.bootcamp2022.entity.Music;
-import com.ciandt.summit.bootcamp2022.entity.Playlist;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -43,7 +42,6 @@ public class MusicEntity {
         this.id = music.getId();
         this.name = music.getName();
         this.artist = new ArtistEntity(music.getArtist());
-        //this.playlists = music.getPlaylists().stream().map(PlaylistEntity::new);
     }
 
     public void addIntoPlaylist(PlaylistEntity playlist) {

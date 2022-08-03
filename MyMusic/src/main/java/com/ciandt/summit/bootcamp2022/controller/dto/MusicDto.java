@@ -17,7 +17,6 @@ public class MusicDto {
   private ArtistDto artista;
 
 
-
   public MusicDto(MusicEntity musicEntity){
     this.id = musicEntity.getId();
     this.nome = musicEntity.getName();
