@@ -8,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -20,16 +21,28 @@ public class PlaylistRepositoryImpl implements PlaylistRepository {
     private final MusicRepositoryWithJpa musicRepositoryWithJpa;
 
   @Override
-  public List<Music> addMusics(String playlistId, List<Music> convertIntoListMusic) {
-    return null;
+  public List<Music> addMusics(String playlistId, List<Music> musicList) {
+    Optional<PlaylistEntity> playlistEntity = findPlaylist(playlistId);
+    List<MusicEntity> list = new ArrayList<>();
+
+    for (Music music: musicList) {
+      Optional<MusicEntity> findById = musicRepositoryWithJpa.findById(music.getId());
+      if(!findById.isPresent()){
+        throw new IllegalArgumentException("Music not found!");
+      }
+      list.add(findById.get());
+    }
+
+    for (MusicEntity musicEntity: list) {
+      playlistEntity.get().addMusics(musicEntity);
+      log.info(musicEntity.getArtist().getName() + " - " + musicEntity.getName() + " added successfully!");
+    }
+    return musicList;
   }
 
   @Override
   public Music addMusic(String playlistId, Music music) {
-    Optional<PlaylistEntity> playlistEntity = playlistRepositoryWithJpa.findById(playlistId);
-    if(!playlistEntity.isPresent()){
-      throw new IllegalArgumentException("Playlist not found!");
-    }
+    Optional<PlaylistEntity> playlistEntity = findPlaylist(playlistId);
 
     Optional<MusicEntity> musicEntity = musicRepositoryWithJpa.findById(music.getId());
     if(!musicEntity.isPresent()){
@@ -41,5 +54,13 @@ public class PlaylistRepositoryImpl implements PlaylistRepository {
     log.info(musicEntity1.getArtist().getName() + " - " + musicEntity1.getName() + " added successfully!");
 
     return music;
+  }
+
+  private Optional<PlaylistEntity> findPlaylist(String playlistId) {
+    Optional<PlaylistEntity> playlistEntity = playlistRepositoryWithJpa.findById(playlistId);
+    if(!playlistEntity.isPresent()){
+      throw new IllegalArgumentException("Playlist not found!");
+    }
+    return playlistEntity;
   }
 }
