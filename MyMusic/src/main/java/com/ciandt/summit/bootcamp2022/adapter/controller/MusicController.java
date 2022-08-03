@@ -2,8 +2,8 @@ package com.ciandt.summit.bootcamp2022.adapter.controller;
 
 import com.ciandt.summit.bootcamp2022.adapter.controller.dto.MusicDto;
 import com.ciandt.summit.bootcamp2022.adapter.controller.dto.ResponseWrapper;
-import com.ciandt.summit.bootcamp2022.entity.MusicEntity;
 import com.ciandt.summit.bootcamp2022.http.TokenAuthorizedClientUtils;
+import com.ciandt.summit.bootcamp2022.infra.entity.MusicEntity;
 import com.ciandt.summit.bootcamp2022.usecase.MusicService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
