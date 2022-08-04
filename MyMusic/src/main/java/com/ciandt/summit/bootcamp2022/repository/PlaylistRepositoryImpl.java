@@ -1,6 +1,7 @@
 package com.ciandt.summit.bootcamp2022.repository;
 
 import com.ciandt.summit.bootcamp2022.entity.Music;
+import com.ciandt.summit.bootcamp2022.entity.MusicRepository;
 import com.ciandt.summit.bootcamp2022.entity.PlaylistRepository;
 import com.ciandt.summit.bootcamp2022.infra.entity.MusicEntity;
 import com.ciandt.summit.bootcamp2022.infra.entity.PlaylistEntity;
@@ -18,7 +19,7 @@ import java.util.Optional;
 public class PlaylistRepositoryImpl implements PlaylistRepository {
 
     private final PlaylistRepositoryWithJpa playlistRepositoryWithJpa;
-    private final MusicRepositoryWithJpa musicRepositoryWithJpa;
+    private final MusicRepositoryImpl musicRepository;
 
   @Override
   public List<Music> addMusics(String playlistId, List<Music> musicList) {
@@ -26,11 +27,8 @@ public class PlaylistRepositoryImpl implements PlaylistRepository {
     List<MusicEntity> list = new ArrayList<>();
 
     for (Music music: musicList) {
-      Optional<MusicEntity> findById = musicRepositoryWithJpa.findById(music.getId());
-      if(!findById.isPresent()){
-        throw new IllegalArgumentException("Music not found!");
-      }
-      list.add(findById.get());
+      MusicEntity musicEntity = new MusicEntity(musicRepository.findMusic(music.getId()));
+      list.add(musicEntity);
     }
 
     for (MusicEntity musicEntity: list) {
@@ -44,14 +42,10 @@ public class PlaylistRepositoryImpl implements PlaylistRepository {
   public Music addMusic(String playlistId, Music music) {
     Optional<PlaylistEntity> playlistEntity = findPlaylist(playlistId);
 
-    Optional<MusicEntity> musicEntity = musicRepositoryWithJpa.findById(music.getId());
-    if(!musicEntity.isPresent()){
-      throw new IllegalArgumentException("Music not found!");
-    }
+    MusicEntity musicEntity = new MusicEntity(musicRepository.findMusic(music.getId()));
 
-    MusicEntity musicEntity1 = new MusicEntity(music);
-    playlistEntity.get().addMusics(musicEntity1);
-    log.info(musicEntity1.getArtist().getName() + " - " + musicEntity1.getName() + " added successfully!");
+    playlistEntity.get().addMusics(musicEntity);
+    log.info(musicEntity.getArtist().getName() + " - " + musicEntity.getName() + " added successfully!");
 
     return music;
   }
