@@ -3,6 +3,7 @@ package com.ciandt.summit.bootcamp2022.adapter.controller;
 import com.ciandt.summit.bootcamp2022.adapter.controller.dto.MusicInformationDto;
 import com.ciandt.summit.bootcamp2022.adapter.controller.dto.ResponseWrapper;
 import com.ciandt.summit.bootcamp2022.entity.PlaylistRepository;
+import com.ciandt.summit.bootcamp2022.exceptions.AuthorizedHandler;
 import com.ciandt.summit.bootcamp2022.http.TokenAuthorizedClientUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -25,6 +26,10 @@ public class PlaylistController {
     public ResponseEntity<ResponseWrapper> addMusicToPlaylist(@PathVariable String playlistId,
                                                               @RequestBody MusicInformationDto musicInformationDto,
                                                               @RequestHeader("Username") String username) {
+
+        if (username.isEmpty())
+            throw new AuthorizedHandler.InvalidRequestHeaderException();
+
 
         tokenAuthorizedClient.isAuthorized(username);
 
