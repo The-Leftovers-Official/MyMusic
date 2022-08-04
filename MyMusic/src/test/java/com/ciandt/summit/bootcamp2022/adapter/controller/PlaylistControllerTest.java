@@ -80,13 +80,13 @@ class PlaylistControllerTest {
           "      } \n" +
           "  },\n" +
           "{\n" +
-          "     \"id\": \"239ae38c-f18c-4a10-887f-522067b02347\",\n" +
+          "     \"id\": \"239ae38c-f18c-4a10-5345534533534\",\n" +
           "     \"name\": \"Roll On John\",\n" +
           "     \"artist\": {\n" +
-          "       \"id\": \"1\",\n" +
+          "       \"id\": \"716923cd-5fd3-4421-8c8e-bafed1f95ae8\",\n" +
           "       \"name\":\"Bob Dylan\"\n" +
           "      } \n" +
-          "  },\n" +
+          "  }\n" +
           "]}";
   public static final String urlTemplate = "/api/playlists/e643958a-f388-4c0c-ab90-787336a61ae1/musics";
 
