@@ -2,6 +2,8 @@ package com.ciandt.summit.bootcamp2022.infra.entity;
 
 
 import com.ciandt.summit.bootcamp2022.entity.Playlist;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -9,6 +11,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
+
+@AllArgsConstructor
+@Builder
 @Entity
 @Table(name = "Playlists")
 @Data
