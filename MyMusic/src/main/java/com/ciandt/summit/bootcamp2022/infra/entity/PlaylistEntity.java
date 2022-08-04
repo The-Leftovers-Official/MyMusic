@@ -18,7 +18,7 @@ public class PlaylistEntity {
     @Column(name = "Id", nullable = false)
     private String id;
 
-    @OneToMany(mappedBy = "music", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "music")
     private List<PlaylistMusicas> musics = new ArrayList<>();
 
     public PlaylistEntity() {

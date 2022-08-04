@@ -1,7 +1,8 @@
 package com.ciandt.summit.bootcamp2022.controller;
 
 
-import com.ciandt.summit.bootcamp2022.controller.dto.MusicDto;
+import com.ciandt.summit.bootcamp2022.adapter.controller.MusicController;
+import com.ciandt.summit.bootcamp2022.adapter.controller.dto.MusicDto;
 import com.ciandt.summit.bootcamp2022.http.TokenAuthorizedClient;
 import com.ciandt.summit.bootcamp2022.http.TokenAuthorizedClientUtils;
 import com.ciandt.summit.bootcamp2022.repository.MusicRepositoryWithJpa;
