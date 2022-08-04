@@ -1,4 +1,4 @@
-package com.ciandt.summit.bootcamp2022.controller;
+package com.ciandt.summit.bootcamp2022.adapter.controller;
 
 
 import com.ciandt.summit.bootcamp2022.adapter.controller.MusicController;
