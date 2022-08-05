@@ -1,9 +1,12 @@
 package com.ciandt.summit.bootcamp2022.adapter.controller;
 
+import com.ciandt.summit.bootcamp2022.http.TokenAuthorizedClient;
+import com.ciandt.summit.bootcamp2022.http.TokenAuthorizedClientUtils;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
@@ -16,6 +19,12 @@ class PlaylistControllerTest {
 
   @Autowired
   private MockMvc mockMvc;
+
+  @MockBean
+  private TokenAuthorizedClientUtils tokenAuthorizedClientUtils;
+
+  @MockBean
+  private TokenAuthorizedClient tokenAuthorizedClient;
 
   String json = "{\n" +
           "  \"data\": [\n" +

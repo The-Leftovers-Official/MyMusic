@@ -1,0 +1,21 @@
+2022-08-04 13:46:24,189 INFO org.springframework.boot.StartupInfoLogger [main] Starting TokenProviderApplication using Java 17.0.2 on lnb035991cps with PID 14510 (/home/pablodl/WOrk/MyMusic/TokenProvider/target/classes started by CIANDT\pablodl in /home/pablodl/WOrk/MyMusic/TokenProvider)
+2022-08-04 13:46:24,191 INFO org.springframework.boot.SpringApplication [main] No active profile set, falling back to default profiles: default
+2022-08-04 13:46:24,903 INFO org.springframework.cloud.context.scope.GenericScope [main] BeanFactory id=e9721107-75f5-3f5c-b834-fd9d902dc74b
+2022-08-04 13:46:25,210 INFO org.springframework.boot.web.embedded.tomcat.TomcatWebServer [main] Tomcat initialized with port(s): 8080 (http)
+2022-08-04 13:46:25,219 INFO org.apache.juli.logging.DirectJDKLog [main] Initializing ProtocolHandler ["http-nio-8080"]
+2022-08-04 13:46:25,219 INFO org.apache.juli.logging.DirectJDKLog [main] Starting service [Tomcat]
+2022-08-04 13:46:25,219 INFO org.apache.juli.logging.DirectJDKLog [main] Starting Servlet engine: [Apache Tomcat/9.0.56]
+2022-08-04 13:46:25,275 INFO org.apache.juli.logging.DirectJDKLog [main] Initializing Spring embedded WebApplicationContext
+2022-08-04 13:46:25,276 INFO org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext [main] Root WebApplicationContext: initialization completed in 1037 ms
+2022-08-04 13:46:25,895 WARN org.springframework.cloud.loadbalancer.config.LoadBalancerCacheAutoConfiguration$LoadBalancerCaffeineWarnLogger [main] Spring Cloud LoadBalancer is currently working with the default cache. While this cache implementation is useful for development and tests, it's recommended to use Caffeine cache in production.You can switch to using Caffeine cache, by adding it and org.springframework.cache.caffeine.CaffeineCacheManager to the classpath.
+2022-08-04 13:46:25,909 INFO org.springframework.boot.actuate.endpoint.web.EndpointLinksResolver [main] Exposing 1 endpoint(s) beneath base path '/actuator'
+2022-08-04 13:46:25,930 INFO org.apache.juli.logging.DirectJDKLog [main] Starting ProtocolHandler ["http-nio-8080"]
+2022-08-04 13:46:25,943 INFO org.springframework.boot.web.embedded.tomcat.TomcatWebServer [main] Tomcat started on port(s): 8080 (http) with context path ''
+2022-08-04 13:46:26,007 INFO org.springframework.boot.StartupInfoLogger [main] Started TokenProviderApplication in 2.141 seconds (JVM running for 2.593)
+2022-08-04 13:47:07,233 INFO org.apache.juli.logging.DirectJDKLog [http-nio-8080-exec-1] Initializing Spring DispatcherServlet 'dispatcherServlet'
+2022-08-04 13:47:07,235 INFO org.springframework.web.servlet.FrameworkServlet [http-nio-8080-exec-1] Initializing Servlet 'dispatcherServlet'
+2022-08-04 13:47:07,239 INFO org.springframework.web.servlet.FrameworkServlet [http-nio-8080-exec-1] Completed initialization in 4 ms
+2022-08-04 13:47:07,364 INFO com.ciandt.token.provider.controllers.TokenController [http-nio-8080-exec-1] Recebido requisição para criação de token para chave: Dara
+2022-08-04 13:47:07,449 INFO com.ciandt.token.provider.controllers.TokenController [http-nio-8080-exec-1] Token gerado com sucesso
+2022-08-04 13:47:07,490 INFO com.ciandt.token.provider.controllers.TokenAuthorizerController [http-nio-8080-exec-2] Recebido requisição para geração de token: Dara
+2022-08-04 13:47:07,495 INFO com.ciandt.token.provider.controllers.TokenAuthorizerController [http-nio-8080-exec-2] Token validado com sucesso
