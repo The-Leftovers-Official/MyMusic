@@ -51,10 +51,9 @@ public class PlaylistController {
 
         if(musicInformationDto.getData().size() == 1) {
             playlistRepository.addMusic(playlistId, musicInformationDto.convertIntoListMusic().get(0));
+        }else {
+            playlistRepository.addMusics(playlistId, musicInformationDto.convertIntoListMusic());
         }
-
-        playlistRepository.addMusics(playlistId, musicInformationDto.convertIntoListMusic());
-
 
 
         return ResponseEntity.ok(new ResponseWrapper<>(musicInformationDto));

@@ -11,6 +11,7 @@ import com.ciandt.summit.bootcamp2022.infra.entity.PlaylistMusicsPKEntity;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -18,15 +19,20 @@ import java.util.List;
 import java.util.Optional;
 
 @Component
-@RequiredArgsConstructor
+
 @Slf4j
 public class PlaylistRepositoryImpl implements PlaylistRepository {
 
-    private final PlaylistRepositoryWithJpa playlistRepositoryWithJpa;
-    private final MusicRepositoryImpl musicRepository;
-    private final PlaylistMusicasImpl playlistMusicsImpl;
+    @Autowired
+    private  PlaylistRepositoryWithJpa playlistRepositoryWithJpa;
 
-    private final ModelMapper modelMapper;
+    @Autowired
+    private  MusicRepositoryImpl musicRepository;
+
+    @Autowired
+    private  PlaylistMusicasImpl playlistMusicsImpl;
+    @Autowired
+    private ModelMapper modelMapper;
 
   @Override
   public List<Music> addMusics(String playlistId, List<Music> musicList) {
@@ -43,7 +49,8 @@ public class PlaylistRepositoryImpl implements PlaylistRepository {
     for (MusicEntity musicEntity: list) {
       playlistEntity.get().addMusics(musicEntity);
       playlistMusicas = playlistMusicsImpl.savePlaylist(modelMapper.map(musicEntity, Music.class), playlist);
-      log.info(playlistMusicas.getMusic().getArtist().getName() + " - " + playlistMusicas.getMusic().getName() + " added successfully!");
+      log.info("Playlist id: " + playlistMusicas.getPlaylist().getId() + " - " + playlistMusicas.getMusic().getName());
+      log.info(musicEntity.getArtist().getName() + " - " + musicEntity.getName() + " added successfully!");
     }
     return musicList;
   }
@@ -56,14 +63,16 @@ public class PlaylistRepositoryImpl implements PlaylistRepository {
 
     playlistEntity.get().addMusics(musicEntity);
 
-    PlaylistMusics returned_playlist = playlistMusicsImpl.savePlaylist(music, modelMapper.map(playlistEntity.get(), Playlist.class));
+    Music music1 = modelMapper.map(musicEntity, Music.class);
+    Playlist playlist = modelMapper.map(playlistEntity.get(), Playlist.class);
+    PlaylistMusics returnedPlaylist = playlistMusicsImpl.savePlaylist(music1, playlist);
 
-    log.info("Playlist id: " + returned_playlist.getPlaylist().getId() + " - " + returned_playlist.getMusic().getName());
+    log.info("Playlist id: " + returnedPlaylist.getPlaylist().getId() + " - " + returnedPlaylist.getMusic().getName());
     log.info(musicEntity.getArtist().getName() + " - " + musicEntity.getName() + " added successfully!");
+
 
     return music;
   }
-
 
   private Optional<PlaylistEntity> findPlaylist(String playlistId) {
     Optional<PlaylistEntity> playlistEntity = playlistRepositoryWithJpa.findById(playlistId);
