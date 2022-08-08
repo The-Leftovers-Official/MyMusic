@@ -1,8 +1,10 @@
 package com.ciandt.summit.bootcamp2022.repository;
 
-import com.ciandt.summit.bootcamp2022.entity.Artist;
-import com.ciandt.summit.bootcamp2022.entity.Music;
+import com.ciandt.summit.bootcamp2022.entity.*;
+import com.ciandt.summit.bootcamp2022.infra.entity.MusicEntity;
 import com.ciandt.summit.bootcamp2022.infra.entity.PlaylistEntity;
+import com.ciandt.summit.bootcamp2022.infra.entity.PlaylistMusicas;
+import com.ciandt.summit.bootcamp2022.infra.entity.PlaylistMusicsPKEntity;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -22,6 +24,9 @@ class PlaylistRepositoryImplTest {
     @Mock
     MusicRepositoryImpl musicRepository;
 
+    @Mock
+    PlaylistMusicsWithJpa playlistMusicsWithJpa;
+
     @InjectMocks
     PlaylistRepositoryImpl playlistRepository;
 
@@ -31,8 +36,13 @@ class PlaylistRepositoryImplTest {
         Artist artist = Artist.builder().id("1").name("artist").build();
         Music music = Music.builder().id("1").name("test").artist(artist).playlists(new ArrayList<>()).build();
         PlaylistEntity playlistEntity = PlaylistEntity.builder().id("1").musics(new ArrayList<>()).build();
+        PlaylistMusicsPKEntity pk = PlaylistMusicsPKEntity.builder().playlistId(playlistEntity.getId()).musicId(music.getId()).build();
+        PlaylistMusicas playlistMusic = PlaylistMusicas.builder().id(pk).music(new MusicEntity(music)).playlist(playlistEntity).build();
+
         Mockito.when(playlistRepositoryWithJpa.findById(Mockito.any())).thenReturn(Optional.of(playlistEntity));
         Mockito.when(musicRepository.findMusic(Mockito.any())).thenReturn(music);
+        Mockito.when(playlistMusicsWithJpa.save(Mockito.any())).thenReturn(playlistMusic);
+
         Music returnedMusic = playlistRepository.addMusic("1", music);
         Assertions.assertEquals(music, returnedMusic);
     }
@@ -47,12 +57,17 @@ class PlaylistRepositoryImplTest {
         musicList.add(music1);
         musicList.add(music2);
         PlaylistEntity playlistEntity = PlaylistEntity.builder().id("1").musics(new ArrayList<>()).build();
+        PlaylistMusicsPKEntity pk = PlaylistMusicsPKEntity.builder().playlistId(playlistEntity.getId()).musicId(music1.getId()).build();
+        PlaylistMusicas playlistMusic = PlaylistMusicas.builder().id(pk).music(new MusicEntity(music1)).playlist(playlistEntity).build();
+
         Mockito.when(playlistRepositoryWithJpa.findById(Mockito.any())).thenReturn(Optional.of(playlistEntity));
         Mockito.when(musicRepository.findMusic(Mockito.any())).thenReturn(music1);
+        Mockito.when(playlistMusicsWithJpa.save(Mockito.any())).thenReturn(playlistMusic);
 
 
         List<Music> returnedMusics = playlistRepository.addMusics("1", musicList);
         Assertions.assertEquals(musicList, returnedMusics);
+        Assertions.assertEquals(2, returnedMusics.size());
     }
 
 }
