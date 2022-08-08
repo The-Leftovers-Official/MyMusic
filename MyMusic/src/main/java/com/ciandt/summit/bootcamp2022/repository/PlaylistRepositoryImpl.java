@@ -19,20 +19,16 @@ import java.util.List;
 import java.util.Optional;
 
 @Component
-
+@RequiredArgsConstructor
 @Slf4j
 public class PlaylistRepositoryImpl implements PlaylistRepository {
 
-    @Autowired
-    private  PlaylistRepositoryWithJpa playlistRepositoryWithJpa;
+    private  final PlaylistRepositoryWithJpa playlistRepositoryWithJpa;
 
-    @Autowired
-    private  MusicRepositoryImpl musicRepository;
+    private  final MusicRepositoryImpl musicRepository;
 
-    @Autowired
-    private  PlaylistMusicasImpl playlistMusicsImpl;
-    @Autowired
-    private ModelMapper modelMapper;
+    private  final PlaylistMusicasImpl playlistMusicsImpl;
+    private final ModelMapper modelMapper;
 
   @Override
   public List<Music> addMusics(String playlistId, List<Music> musicList) {
