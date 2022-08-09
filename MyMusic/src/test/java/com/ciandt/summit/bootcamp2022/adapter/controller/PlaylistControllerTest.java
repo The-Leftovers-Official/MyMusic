@@ -98,6 +98,7 @@ class PlaylistControllerTest {
           "  }\n" +
           "]}";
   public static final String urlTemplate = "/api/playlists/e643958a-f388-4c0c-ab90-787336a61ae1/musics";
+  public static final String urlBaseTemplate = "/api/playlists/";
 
   //TODO: Erro de autorização (token)
   @Test
@@ -175,7 +176,6 @@ class PlaylistControllerTest {
             .andExpect(status().isBadRequest());
 
   }
-
 
 
 }

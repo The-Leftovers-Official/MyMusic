@@ -1,11 +1,14 @@
 package com.ciandt.summit.bootcamp2022.adapter.controller;
 
+import com.ciandt.summit.bootcamp2022.adapter.controller.dto.DeletedMusicFromPlaylistDto;
 import com.ciandt.summit.bootcamp2022.adapter.controller.dto.MusicInformationDto;
 import com.ciandt.summit.bootcamp2022.adapter.controller.dto.ResponseWrapper;
 import com.ciandt.summit.bootcamp2022.entity.Music;
+import com.ciandt.summit.bootcamp2022.entity.PlaylistMusicsRepository;
 import com.ciandt.summit.bootcamp2022.entity.PlaylistRepository;
 import com.ciandt.summit.bootcamp2022.exceptions.AuthorizedHandler;
 import com.ciandt.summit.bootcamp2022.http.TokenAuthorizedClientUtils;
+import com.ciandt.summit.bootcamp2022.repository.PlaylistMusicasImpl;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -17,6 +20,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.transaction.Transactional;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 @RestController
 @RequestMapping("/api/playlists/")
@@ -27,6 +32,9 @@ public class PlaylistController {
 
     @Autowired
     private PlaylistRepository playlistRepository;
+
+    @Autowired
+    private PlaylistMusicasImpl playlistMusicsRepository;
 
     @Operation(summary = "Add music into playlist")
     @ApiResponses(value = {
@@ -57,5 +65,24 @@ public class PlaylistController {
 
 
         return ResponseEntity.ok(new ResponseWrapper<>(musicInformationDto));
+    }
+
+
+    @DeleteMapping("/{playlistId}/musics/{musicId}")
+    @Transactional
+    public ResponseEntity<DeletedMusicFromPlaylistDto> deleteMusicFromPlaylist(@PathVariable @NotNull @NotEmpty String playlistId,
+                                                                                @PathVariable @NotNull @NotEmpty String musicId,
+                                                                                @RequestHeader("Username") String username ) throws IllegalArgumentException{
+        if (username.isEmpty())
+            throw new AuthorizedHandler.InvalidRequestHeaderException();
+
+
+            tokenAuthorizedClient.isAuthorized(username);
+
+
+            playlistMusicsRepository.deleteMusicFromPlaylist(playlistId, musicId);
+
+            return ResponseEntity.ok().body(new DeletedMusicFromPlaylistDto(playlistId, musicId));
+
     }
 }
