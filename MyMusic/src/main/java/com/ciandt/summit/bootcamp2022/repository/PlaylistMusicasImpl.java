@@ -22,6 +22,11 @@ public class PlaylistMusicasImpl implements PlaylistMusicsRepository {
     private final ModelMapper modelMapper;
 
     @Override
+    public void deleteMusicFromPlaylist(String playlistId, String musicID) {
+
+    }
+
+    @Override
     public PlaylistMusics savePlaylist(Music music, Playlist playlist) {
 
         PlaylistMusicsPKEntity playlistMusicsPKEntity = PlaylistMusicsPKEntity.builder()
