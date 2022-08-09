@@ -13,6 +13,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
 
+import java.util.Optional;
+
 
 @Component
 @RequiredArgsConstructor
@@ -22,11 +24,6 @@ public class PlaylistMusicasImpl implements PlaylistMusicsRepository {
     private final PlaylistMusicsWithJpa playlistMusicsWithJpa;
 
     private final ModelMapper modelMapper;
-
-    @Override
-    public void deleteMusicFromPlaylist(String playlistId, String musicID) {
-
-    }
 
     @Override
     public PlaylistMusics savePlaylist(Music music, Playlist playlist) {
@@ -49,7 +46,19 @@ public class PlaylistMusicasImpl implements PlaylistMusicsRepository {
 
     @Override
     public void deleteMusicFromPlaylist(String playlistId, String musicId) {
-        playlistMusicsWithJpa.deleteMusicFromPlaylist(playlistId, musicId);
-        log.info("Cheguei aqui");
+        PlaylistMusicsPKEntity pk = PlaylistMusicsPKEntity
+                .builder()
+                .musicId(musicId)
+                .playlistId(playlistId)
+                .build();
+
+        Optional<PlaylistMusicas> playlistMusicas = playlistMusicsWithJpa.findById(pk);
+
+        if (playlistMusicas.isPresent()){
+           playlistMusicsWithJpa.deleteMusicFromPlaylist(playlistId, musicId);
+        } else{
+            throw new IllegalArgumentException("Music or playlist not found!");
+        }
+
     }
 }

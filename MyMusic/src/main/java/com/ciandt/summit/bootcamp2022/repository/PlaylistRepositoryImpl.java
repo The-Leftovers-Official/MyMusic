@@ -67,18 +67,6 @@ public class PlaylistRepositoryImpl implements PlaylistRepository {
     return music;
   }
 
-  @Override
-  public void deleteMusic(String playlistId, Music music) {
-    Optional<PlaylistEntity> playlistEntity = findPlaylist(playlistId);
-
-    MusicEntity musicEntity = new MusicEntity(musicRepository.findMusic(music.getId()));
-
-    Music music1 = modelMapper.map(musicEntity, Music.class);
-    Playlist playlist = modelMapper.map(playlistEntity.get(), Playlist.class);
-    playlistMusicsImpl.deleteMusicFromPlaylist(playlist.getId(), music1.getId());
-
-  }
-
   private Optional<PlaylistEntity> findPlaylist(String playlistId) {
     Optional<PlaylistEntity> playlistEntity = playlistRepositoryWithJpa.findById(playlistId);
     if(!playlistEntity.isPresent()){

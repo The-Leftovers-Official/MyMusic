@@ -8,6 +8,7 @@ import com.ciandt.summit.bootcamp2022.entity.PlaylistMusicsRepository;
 import com.ciandt.summit.bootcamp2022.entity.PlaylistRepository;
 import com.ciandt.summit.bootcamp2022.exceptions.AuthorizedHandler;
 import com.ciandt.summit.bootcamp2022.http.TokenAuthorizedClientUtils;
+import com.ciandt.summit.bootcamp2022.repository.PlaylistMusicasImpl;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -33,7 +34,7 @@ public class PlaylistController {
     private PlaylistRepository playlistRepository;
 
     @Autowired
-    private PlaylistMusicsRepository playlistMusicsRepository;
+    private PlaylistMusicasImpl playlistMusicsRepository;
 
     @Operation(summary = "Add music into playlist")
     @ApiResponses(value = {
@@ -69,17 +70,19 @@ public class PlaylistController {
 
     @DeleteMapping("/{playlistId}/musics/{musicId}")
     @Transactional
-    private ResponseEntity<DeletedMusicFromPlaylistDto> deleteMusicFromPlaylist(@PathVariable @NotNull @NotEmpty String playlistId,
+    public ResponseEntity<DeletedMusicFromPlaylistDto> deleteMusicFromPlaylist(@PathVariable @NotNull @NotEmpty String playlistId,
                                                                                 @PathVariable @NotNull @NotEmpty String musicId,
                                                                                 @RequestHeader("Username") String username ) throws IllegalArgumentException{
         if (username.isEmpty())
             throw new AuthorizedHandler.InvalidRequestHeaderException();
 
 
-        tokenAuthorizedClient.isAuthorized(username);
+            tokenAuthorizedClient.isAuthorized(username);
 
-        playlistMusicsRepository.deleteMusicFromPlaylist(playlistId, musicId);
-        
-        return ResponseEntity.ok().body(new DeletedMusicFromPlaylistDto(playlistId, musicId));
+
+            playlistMusicsRepository.deleteMusicFromPlaylist(playlistId, musicId);
+
+            return ResponseEntity.ok().body(new DeletedMusicFromPlaylistDto(playlistId, musicId));
+
     }
 }
