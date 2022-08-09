@@ -35,6 +35,7 @@ public class PlaylistEntity {
                 .music(music)
                 .build();
 
+        music.addIntoPlaylist(this);
         this.musics.add(musics);
 
     }

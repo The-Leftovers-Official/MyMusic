@@ -3,6 +3,7 @@ package com.ciandt.summit.bootcamp2022.infra.entity;
 
 import com.ciandt.summit.bootcamp2022.entity.Music;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -11,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
+@Builder
 @Entity
 @Table(name = "Musicas")
 @Data
