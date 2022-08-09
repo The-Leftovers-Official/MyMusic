@@ -13,6 +13,6 @@ public interface PlaylistMusicsWithJpa extends JpaRepository<PlaylistMusicas, Pl
   @Modifying
   @Transactional
   @Query(value = "DELETE FROM PlaylistMusicas WHERE PlaylistMusicas.PlaylistId = :playlistId AND PlaylistMusicas.MusicaId = :musicId", nativeQuery = true)
-  PlaylistMusicas deleteMusicFromPlaylist(String playlistId, String musicId);
+  void deleteMusicFromPlaylist(String playlistId, String musicId);
 
 }
