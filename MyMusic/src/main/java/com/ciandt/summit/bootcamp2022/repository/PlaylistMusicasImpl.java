@@ -10,6 +10,7 @@ import com.ciandt.summit.bootcamp2022.infra.entity.PlaylistMusicas;
 import com.ciandt.summit.bootcamp2022.infra.entity.PlaylistMusicsPKEntity;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.logging.log4j.message.Message;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
 
@@ -55,7 +56,8 @@ public class PlaylistMusicasImpl implements PlaylistMusicsRepository {
         Optional<PlaylistMusicas> playlistMusicas = playlistMusicsWithJpa.findById(pk);
 
         if (playlistMusicas.isPresent()){
-           playlistMusicsWithJpa.deleteMusicFromPlaylist(playlistId, musicId);
+            playlistMusicsWithJpa.deleteMusicFromPlaylist(playlistId, musicId);
+
         } else{
             throw new IllegalArgumentException("Music or playlist not found!");
         }

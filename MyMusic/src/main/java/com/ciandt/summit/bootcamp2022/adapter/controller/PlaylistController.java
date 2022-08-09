@@ -15,6 +15,7 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import org.apache.logging.log4j.message.Message;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -35,6 +36,7 @@ public class PlaylistController {
 
     @Autowired
     private PlaylistMusicasImpl playlistMusicsRepository;
+
 
     @Operation(summary = "Add music into playlist")
     @ApiResponses(value = {
@@ -76,9 +78,7 @@ public class PlaylistController {
         if (username.isEmpty())
             throw new AuthorizedHandler.InvalidRequestHeaderException();
 
-
             tokenAuthorizedClient.isAuthorized(username);
-
 
             playlistMusicsRepository.deleteMusicFromPlaylist(playlistId, musicId);
 
