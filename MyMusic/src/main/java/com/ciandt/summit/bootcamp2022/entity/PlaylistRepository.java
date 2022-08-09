@@ -6,6 +6,7 @@ public interface PlaylistRepository {
 
     Music addMusic(String playlistId, Music music);
 
-
     List<Music> addMusics(String playlistId, List<Music> convertIntoListMusic);
+
+    void deleteMusic(String playlistId, Music music);
 }

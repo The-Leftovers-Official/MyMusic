@@ -6,12 +6,9 @@ import com.ciandt.summit.bootcamp2022.entity.PlaylistMusics;
 import com.ciandt.summit.bootcamp2022.entity.PlaylistRepository;
 import com.ciandt.summit.bootcamp2022.infra.entity.MusicEntity;
 import com.ciandt.summit.bootcamp2022.infra.entity.PlaylistEntity;
-import com.ciandt.summit.bootcamp2022.infra.entity.PlaylistMusicas;
-import com.ciandt.summit.bootcamp2022.infra.entity.PlaylistMusicsPKEntity;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -68,6 +65,18 @@ public class PlaylistRepositoryImpl implements PlaylistRepository {
 
 
     return music;
+  }
+
+  @Override
+  public void deleteMusic(String playlistId, Music music) {
+    Optional<PlaylistEntity> playlistEntity = findPlaylist(playlistId);
+
+    MusicEntity musicEntity = new MusicEntity(musicRepository.findMusic(music.getId()));
+
+    Music music1 = modelMapper.map(musicEntity, Music.class);
+    Playlist playlist = modelMapper.map(playlistEntity.get(), Playlist.class);
+    playlistMusicsImpl.deleteMusicFromPlaylist(playlist.getId(), music1.getId());
+
   }
 
   private Optional<PlaylistEntity> findPlaylist(String playlistId) {

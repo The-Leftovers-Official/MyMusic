@@ -9,12 +9,14 @@ import com.ciandt.summit.bootcamp2022.infra.entity.PlaylistEntity;
 import com.ciandt.summit.bootcamp2022.infra.entity.PlaylistMusicas;
 import com.ciandt.summit.bootcamp2022.infra.entity.PlaylistMusicsPKEntity;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
 
 
 @Component
 @RequiredArgsConstructor
+@Slf4j
 public class PlaylistMusicasImpl implements PlaylistMusicsRepository {
 
     private final PlaylistMusicsWithJpa playlistMusicsWithJpa;
@@ -38,5 +40,11 @@ public class PlaylistMusicasImpl implements PlaylistMusicsRepository {
 
         PlaylistMusicas returnedPlaylistMusic = playlistMusicsWithJpa.save(playlistMusicas);
         return modelMapper.map(returnedPlaylistMusic, PlaylistMusics.class);
+    }
+
+    @Override
+    public void deleteMusicFromPlaylist(String playlistId, String musicId) {
+        playlistMusicsWithJpa.deleteMusicFromPlaylist(playlistId, musicId);
+        log.info("Cheguei aqui");
     }
 }
