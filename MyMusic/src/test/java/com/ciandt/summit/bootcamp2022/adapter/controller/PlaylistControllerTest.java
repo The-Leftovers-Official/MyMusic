@@ -2,19 +2,31 @@ package com.ciandt.summit.bootcamp2022.adapter.controller;
 
 import com.ciandt.summit.bootcamp2022.http.TokenAuthorizedClient;
 import com.ciandt.summit.bootcamp2022.http.TokenAuthorizedClientUtils;
+import com.ciandt.summit.bootcamp2022.infra.entity.*;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.orm.jpa.AutoConfigureTestEntityManager;
+import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.ArrayList;
 
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 
 @SpringBootTest
 @AutoConfigureMockMvc
+@AutoConfigureTestEntityManager
+@Transactional
+@ActiveProfiles("test")
 class PlaylistControllerTest {
 
   @Autowired
@@ -25,6 +37,10 @@ class PlaylistControllerTest {
 
   @MockBean
   private TokenAuthorizedClient tokenAuthorizedClient;
+
+  @Autowired
+  private TestEntityManager entityManager;
+
 
   String json = "{\n" +
           "  \"data\": [\n" +
@@ -61,7 +77,7 @@ class PlaylistControllerTest {
   String jsonMusicThatNotExists = "{\n" +
           "  \"data\": [\n" +
           "  {\n" +
-          "     \"id\": \"1\",\n" +
+          "     \"id\": \"4\",\n" +
           "     \"name\": \"Ani Na'amin\",\n" +
           "     \"artist\": {\n" +
           "       \"id\": \"2154a968-f48c-4890-a70f-a2c552c84b71\",\n" +
@@ -100,6 +116,50 @@ class PlaylistControllerTest {
   public static final String urlTemplate = "/api/playlists/e643958a-f388-4c0c-ab90-787336a61ae1/musics";
   public static final String urlBaseTemplate = "/api/playlists/";
 
+  private PlaylistEntity PLAYLIST_ENTITY;
+  private MusicEntity MUSIC_ENTITY;
+  @BeforeEach
+  void setup() {
+
+    PLAYLIST_ENTITY = PlaylistEntity
+            .builder()
+            .id("1")
+            .musics(new ArrayList<>())
+            .build();
+
+    ArtistEntity artistEntity = ArtistEntity
+            .builder()
+            .id("1")
+            .name("Nx Zero")
+            .build();
+
+    entityManager.persist(artistEntity);
+
+    MUSIC_ENTITY = MusicEntity
+            .builder()
+            .id("1")
+            .name("Cartas pra você")
+            .artist(artistEntity)
+            .playlists(new ArrayList<>())
+            .build();
+
+    PlaylistMusicsPKEntity pk = PlaylistMusicsPKEntity
+            .builder()
+            .musicId("1")
+            .playlistId("1")
+            .build();
+
+    PlaylistMusicas playlistMusicas = PlaylistMusicas
+            .builder()
+            .id(pk)
+            .music(MUSIC_ENTITY)
+            .playlist(PLAYLIST_ENTITY)
+            .build();
+
+    entityManager.persist(playlistMusicas);
+
+  }
+
   //TODO: Erro de autorização (token)
   @Test
   public void shouldReturnNotAuthorized() throws Exception {
@@ -115,6 +175,7 @@ class PlaylistControllerTest {
   //TODO: Retorna 200 quando uma música é adicionada à playlist
   @Test
   public void shouldReturn200WhenAddANewMusicIsAddedOnPlaylist() throws  Exception  {
+
 
     mockMvc
             .perform(MockMvcRequestBuilders.post(urlTemplate)
@@ -135,7 +196,6 @@ class PlaylistControllerTest {
                     .content(jsonMusicList)
                     .contentType(MediaType.APPLICATION_JSON))
             .andExpect(status().isOk());
-
   }
 
   //TODO: Retorna 400 quando tento adicionar uma música inexistente à playlist
@@ -156,7 +216,7 @@ class PlaylistControllerTest {
   public void shouldReturn400WhenTheMusicExistsButPlaylistNotExists() throws  Exception  {
 
     mockMvc
-            .perform(MockMvcRequestBuilders.post("/api/playlists/1/musics")
+            .perform(MockMvcRequestBuilders.post("/api/playlists/12/musics")
                     .header("Username", "teste")
                     .content(json)
                     .contentType(MediaType.APPLICATION_JSON))
@@ -177,5 +237,16 @@ class PlaylistControllerTest {
 
   }
 
+  @Test
+  public void shouldReturn200WhenDeleteNewMusicFromPlaylist() throws  Exception  {
+
+    String returnedMessage = "Successful deletion";
+
+    mockMvc
+            .perform(MockMvcRequestBuilders.delete(urlBaseTemplate + "/" + PLAYLIST_ENTITY.getId() + "/musics/" + MUSIC_ENTITY.getId())
+                    .header("Username", "teste"))
+            .andExpect(status().isOk())
+            .andExpect(jsonPath("$.message").value(returnedMessage));
+  }
 
 }
