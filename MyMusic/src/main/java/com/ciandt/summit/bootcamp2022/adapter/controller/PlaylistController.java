@@ -72,9 +72,8 @@ public class PlaylistController {
 
     @Operation(summary = "Delete music from playlist")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Music deleted successfully",
-                    content = { @Content(mediaType = "application/json",
-                            schema = @Schema(implementation = Music.class)) }),
+            @ApiResponse(responseCode = "200", description = "Successful deletion",
+                    content = @Content),
             @ApiResponse(responseCode = "400", description = "Music or playlist don't exists on database",
                     content = @Content),
             @ApiResponse(responseCode = "401", description = "Not authorized",
@@ -87,11 +86,11 @@ public class PlaylistController {
         if (username.isEmpty())
             throw new AuthorizedHandler.InvalidRequestHeaderException();
 
-            tokenAuthorizedClient.isAuthorized(username);
+        tokenAuthorizedClient.isAuthorized(username);
 
-            playlistMusicsRepository.deleteMusicFromPlaylist(playlistId, musicId);
+        playlistMusicsRepository.deleteMusicFromPlaylist(playlistId, musicId);
 
-            return ResponseEntity.ok().body(new DeletedMusicFromPlaylistDto(playlistId, musicId));
+        return ResponseEntity.ok().body(new DeletedMusicFromPlaylistDto(playlistId, musicId));
 
     }
 }
