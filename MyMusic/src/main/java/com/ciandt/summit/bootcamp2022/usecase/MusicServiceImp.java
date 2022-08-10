@@ -1,6 +1,6 @@
 package com.ciandt.summit.bootcamp2022.usecase;
 
-import com.ciandt.summit.bootcamp2022.infra.entity.MusicEntity;
+import com.ciandt.summit.bootcamp2022.infra.entity.music.MusicEntity;
 import com.ciandt.summit.bootcamp2022.repository.MusicRepositoryWithJpa;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;

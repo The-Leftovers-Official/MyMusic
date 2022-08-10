@@ -1,17 +1,19 @@
 package com.ciandt.summit.bootcamp2022.repository;
 
-import com.ciandt.summit.bootcamp2022.entity.*;
-import com.ciandt.summit.bootcamp2022.infra.entity.*;
+import com.ciandt.summit.bootcamp2022.entity.artist.Artist;
+import com.ciandt.summit.bootcamp2022.entity.music.Music;
+import com.ciandt.summit.bootcamp2022.entity.playlist.Playlist;
+import com.ciandt.summit.bootcamp2022.entity.playlist.PlaylistMusics;
+import com.ciandt.summit.bootcamp2022.entity.playlist.PlaylistMusicsPK;
+import com.ciandt.summit.bootcamp2022.infra.entity.playlist.PlaylistEntity;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.junit.jupiter.api.function.Executable;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.ArrayList;
 import java.util.Arrays;

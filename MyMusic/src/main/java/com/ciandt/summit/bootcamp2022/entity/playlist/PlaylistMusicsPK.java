@@ -1,4 +1,4 @@
-package com.ciandt.summit.bootcamp2022.entity;
+package com.ciandt.summit.bootcamp2022.entity.playlist;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,11 +9,9 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Builder
 @Data
-public class PlaylistMusics {
+public class PlaylistMusicsPK {
 
-    PlaylistMusicsPK id;
+    private String playlistId;
 
-    Playlist playlist;
-
-    Music music;
+    private String musicId;
 }

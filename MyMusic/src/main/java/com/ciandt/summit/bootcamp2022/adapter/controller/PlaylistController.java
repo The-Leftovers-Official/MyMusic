@@ -3,9 +3,8 @@ package com.ciandt.summit.bootcamp2022.adapter.controller;
 import com.ciandt.summit.bootcamp2022.adapter.controller.dto.DeletedMusicFromPlaylistDto;
 import com.ciandt.summit.bootcamp2022.adapter.controller.dto.MusicInformationDto;
 import com.ciandt.summit.bootcamp2022.adapter.controller.dto.ResponseWrapper;
-import com.ciandt.summit.bootcamp2022.entity.Music;
-import com.ciandt.summit.bootcamp2022.entity.PlaylistMusicsRepository;
-import com.ciandt.summit.bootcamp2022.entity.PlaylistRepository;
+import com.ciandt.summit.bootcamp2022.entity.music.Music;
+import com.ciandt.summit.bootcamp2022.entity.playlist.PlaylistRepository;
 import com.ciandt.summit.bootcamp2022.exceptions.AuthorizedHandler;
 import com.ciandt.summit.bootcamp2022.http.TokenAuthorizedClientUtils;
 import com.ciandt.summit.bootcamp2022.repository.PlaylistMusicasImpl;
@@ -15,7 +14,6 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
-import org.apache.logging.log4j.message.Message;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -70,6 +68,14 @@ public class PlaylistController {
     }
 
 
+    @Operation(summary = "Delete music from playlist")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Successful deletion",
+                    content = @Content),
+            @ApiResponse(responseCode = "400", description = "Music or playlist don't exists on database",
+                    content = @Content),
+            @ApiResponse(responseCode = "401", description = "Not authorized",
+                    content = @Content)})
     @DeleteMapping("/{playlistId}/musics/{musicId}")
     @Transactional
     public ResponseEntity<DeletedMusicFromPlaylistDto> deleteMusicFromPlaylist(@PathVariable @NotNull @NotEmpty String playlistId,
@@ -78,11 +84,11 @@ public class PlaylistController {
         if (username.isEmpty())
             throw new AuthorizedHandler.InvalidRequestHeaderException();
 
-            tokenAuthorizedClient.isAuthorized(username);
+        tokenAuthorizedClient.isAuthorized(username);
 
-            playlistMusicsRepository.deleteMusicFromPlaylist(playlistId, musicId);
+        playlistMusicsRepository.deleteMusicFromPlaylist(playlistId, musicId);
 
-            return ResponseEntity.ok().body(new DeletedMusicFromPlaylistDto(playlistId, musicId));
+        return ResponseEntity.ok().body(new DeletedMusicFromPlaylistDto(playlistId, musicId));
 
     }
 }

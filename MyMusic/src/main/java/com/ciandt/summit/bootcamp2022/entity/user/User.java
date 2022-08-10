@@ -1,5 +1,6 @@
-package com.ciandt.summit.bootcamp2022.entity;
+package com.ciandt.summit.bootcamp2022.entity.user;
 
+import com.ciandt.summit.bootcamp2022.entity.playlist.Playlist;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -11,14 +12,16 @@ import java.util.UUID;
 @NoArgsConstructor
 @Builder
 @Data
-public class Artist {
+public class User {
+
     private String id;
 
     private String name;
 
-    public Artist(String name) {
+    private Playlist playlist;
+
+    public User(String id, String name) {
         this.id = UUID.randomUUID().toString();
         this.name = name;
     }
-
 }

@@ -1,11 +1,11 @@
 package com.ciandt.summit.bootcamp2022.repository;
 
-import com.ciandt.summit.bootcamp2022.entity.Music;
-import com.ciandt.summit.bootcamp2022.entity.Playlist;
-import com.ciandt.summit.bootcamp2022.entity.PlaylistMusics;
-import com.ciandt.summit.bootcamp2022.entity.PlaylistRepository;
-import com.ciandt.summit.bootcamp2022.infra.entity.MusicEntity;
-import com.ciandt.summit.bootcamp2022.infra.entity.PlaylistEntity;
+import com.ciandt.summit.bootcamp2022.entity.music.Music;
+import com.ciandt.summit.bootcamp2022.entity.playlist.Playlist;
+import com.ciandt.summit.bootcamp2022.entity.playlist.PlaylistMusics;
+import com.ciandt.summit.bootcamp2022.entity.playlist.PlaylistRepository;
+import com.ciandt.summit.bootcamp2022.infra.entity.music.MusicEntity;
+import com.ciandt.summit.bootcamp2022.infra.entity.playlist.PlaylistEntity;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;

@@ -1,5 +1,8 @@
-package com.ciandt.summit.bootcamp2022.entity;
+package com.ciandt.summit.bootcamp2022.entity.music;
 
+import com.ciandt.summit.bootcamp2022.entity.artist.Artist;
+import com.ciandt.summit.bootcamp2022.entity.playlist.Playlist;
+import com.ciandt.summit.bootcamp2022.entity.playlist.PlaylistMusics;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

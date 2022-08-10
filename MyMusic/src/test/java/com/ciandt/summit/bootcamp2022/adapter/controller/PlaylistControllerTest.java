@@ -2,7 +2,11 @@ package com.ciandt.summit.bootcamp2022.adapter.controller;
 
 import com.ciandt.summit.bootcamp2022.http.TokenAuthorizedClient;
 import com.ciandt.summit.bootcamp2022.http.TokenAuthorizedClientUtils;
-import com.ciandt.summit.bootcamp2022.infra.entity.*;
+import com.ciandt.summit.bootcamp2022.infra.entity.artist.ArtistEntity;
+import com.ciandt.summit.bootcamp2022.infra.entity.music.MusicEntity;
+import com.ciandt.summit.bootcamp2022.infra.entity.playlist.PlaylistEntity;
+import com.ciandt.summit.bootcamp2022.infra.entity.playlist.PlaylistMusicas;
+import com.ciandt.summit.bootcamp2022.infra.entity.playlist.PlaylistMusicsPKEntity;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
