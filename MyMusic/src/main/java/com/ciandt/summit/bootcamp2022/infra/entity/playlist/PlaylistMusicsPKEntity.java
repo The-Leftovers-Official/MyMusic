@@ -1,4 +1,4 @@
-package com.ciandt.summit.bootcamp2022.infra.entity;
+package com.ciandt.summit.bootcamp2022.infra.entity.playlist;
 
 import lombok.*;
 

@@ -1,7 +1,7 @@
-package com.ciandt.summit.bootcamp2022.infra.entity;
+package com.ciandt.summit.bootcamp2022.infra.entity.user;
 
 
-import com.ciandt.summit.bootcamp2022.infra.entity.PlaylistEntity;
+import com.ciandt.summit.bootcamp2022.infra.entity.playlist.PlaylistEntity;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 

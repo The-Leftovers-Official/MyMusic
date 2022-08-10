@@ -1,8 +1,8 @@
 package com.ciandt.summit.bootcamp2022.repository;
 
-import com.ciandt.summit.bootcamp2022.entity.Music;
-import com.ciandt.summit.bootcamp2022.entity.MusicRepository;
-import com.ciandt.summit.bootcamp2022.infra.entity.MusicEntity;
+import com.ciandt.summit.bootcamp2022.entity.music.Music;
+import com.ciandt.summit.bootcamp2022.entity.music.MusicRepository;
+import com.ciandt.summit.bootcamp2022.infra.entity.music.MusicEntity;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;

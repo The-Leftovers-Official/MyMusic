@@ -2,9 +2,9 @@ package com.ciandt.summit.bootcamp2022.adapter.controller;
 
 import com.ciandt.summit.bootcamp2022.adapter.controller.dto.MusicDto;
 import com.ciandt.summit.bootcamp2022.adapter.controller.dto.ResponseWrapper;
-import com.ciandt.summit.bootcamp2022.entity.Music;
+import com.ciandt.summit.bootcamp2022.entity.music.Music;
 import com.ciandt.summit.bootcamp2022.http.TokenAuthorizedClientUtils;
-import com.ciandt.summit.bootcamp2022.infra.entity.MusicEntity;
+import com.ciandt.summit.bootcamp2022.infra.entity.music.MusicEntity;
 import com.ciandt.summit.bootcamp2022.usecase.MusicService;
 import com.ciandt.summit.bootcamp2022.usecase.MusicServiceImp;
 import io.swagger.v3.oas.annotations.Operation;

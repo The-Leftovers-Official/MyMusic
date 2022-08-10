@@ -1,7 +1,15 @@
 package com.ciandt.summit.bootcamp2022.repository;
 
-import com.ciandt.summit.bootcamp2022.entity.*;
-import com.ciandt.summit.bootcamp2022.infra.entity.*;
+import com.ciandt.summit.bootcamp2022.entity.artist.Artist;
+import com.ciandt.summit.bootcamp2022.entity.music.Music;
+import com.ciandt.summit.bootcamp2022.entity.playlist.Playlist;
+import com.ciandt.summit.bootcamp2022.entity.playlist.PlaylistMusics;
+import com.ciandt.summit.bootcamp2022.entity.playlist.PlaylistMusicsPK;
+import com.ciandt.summit.bootcamp2022.infra.entity.artist.ArtistEntity;
+import com.ciandt.summit.bootcamp2022.infra.entity.music.MusicEntity;
+import com.ciandt.summit.bootcamp2022.infra.entity.playlist.PlaylistEntity;
+import com.ciandt.summit.bootcamp2022.infra.entity.playlist.PlaylistMusicas;
+import com.ciandt.summit.bootcamp2022.infra.entity.playlist.PlaylistMusicsPKEntity;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
