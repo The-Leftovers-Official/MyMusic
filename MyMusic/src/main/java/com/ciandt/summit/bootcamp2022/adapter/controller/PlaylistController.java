@@ -70,6 +70,15 @@ public class PlaylistController {
     }
 
 
+    @Operation(summary = "Delete music from playlist")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Music deleted successfully",
+                    content = { @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = Music.class)) }),
+            @ApiResponse(responseCode = "400", description = "Music or playlist don't exists on database",
+                    content = @Content),
+            @ApiResponse(responseCode = "401", description = "Not authorized",
+                    content = @Content)})
     @DeleteMapping("/{playlistId}/musics/{musicId}")
     @Transactional
     public ResponseEntity<DeletedMusicFromPlaylistDto> deleteMusicFromPlaylist(@PathVariable @NotNull @NotEmpty String playlistId,

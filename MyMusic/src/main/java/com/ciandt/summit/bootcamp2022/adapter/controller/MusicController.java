@@ -6,6 +6,7 @@ import com.ciandt.summit.bootcamp2022.entity.Music;
 import com.ciandt.summit.bootcamp2022.http.TokenAuthorizedClientUtils;
 import com.ciandt.summit.bootcamp2022.infra.entity.MusicEntity;
 import com.ciandt.summit.bootcamp2022.usecase.MusicService;
+import com.ciandt.summit.bootcamp2022.usecase.MusicServiceImp;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -31,7 +32,7 @@ import org.springframework.web.bind.annotation.*;
 public class MusicController {
 
     @Autowired
-    private MusicService musicService;
+    private final MusicService musicService = new MusicServiceImp();
 
     @Autowired
     private TokenAuthorizedClientUtils tokenAuthorizedClient;
