@@ -16,11 +16,9 @@ public class MusicServiceImp implements MusicService{
   private MusicRepositoryWithJpa musicRepositoryWithJpa;
 
   @Override
-  public Page<MusicEntity> getMusicByNameOrArtist(String filtroMusica, String filtroArtista, Pageable pageable) {
-    Page<MusicEntity> music = musicRepositoryWithJpa
-            .findByNameContainingIgnoreCaseOrArtistNameContainingIgnoreCaseOrderByArtistNameAscName(filtroMusica, filtroArtista, pageable);
-
-    return music;
+  public Page<MusicEntity> getMusicByNameOrArtist(String filterMusic, String filterArtist, Pageable pageable) {
+    return musicRepositoryWithJpa
+            .findByNameContainingIgnoreCaseOrArtistNameContainingIgnoreCaseOrderByArtistNameAscName(filterMusic, filterArtist, pageable);
   }
 
   @Override

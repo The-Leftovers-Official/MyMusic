@@ -13,14 +13,14 @@ public class MusicDto {
 
 
   private String id;
-  private String nome;
-  private ArtistDto artista;
+  private String name;
+  private ArtistDto artist;
 
 
   public MusicDto(MusicEntity musicEntity){
     this.id = musicEntity.getId();
-    this.nome = musicEntity.getName();
-    this.artista = new ArtistDto(musicEntity.getArtist());
+    this.name = musicEntity.getName();
+    this.artist = new ArtistDto(musicEntity.getArtist());
   }
 
     public static Page<MusicDto> converter(Page<MusicEntity> musicEntity) {
