@@ -4,6 +4,7 @@ import com.ciandt.summit.bootcamp2022.infra.entity.playlist.PlaylistMusicas;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.data.domain.Page;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -24,7 +25,7 @@ public class PlaylistDto {
         this.music = new MusicDto(playlistMusicas.getMusic());
     }
 
-    public static List<PlaylistDto> converter(List<PlaylistMusicas> playlistMusicasList) {
-        return playlistMusicasList.stream().map(PlaylistDto::new).collect(Collectors.toList());
+    public static Page<PlaylistDto> converter(Page<PlaylistMusicas> playlistMusicasPage) {
+        return playlistMusicasPage.map(PlaylistDto::new);
     }
 }

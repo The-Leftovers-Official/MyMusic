@@ -3,6 +3,7 @@ package com.ciandt.summit.bootcamp2022.repository;
 import com.ciandt.summit.bootcamp2022.infra.entity.playlist.PlaylistMusicas;
 import com.ciandt.summit.bootcamp2022.infra.entity.playlist.PlaylistMusicsPKEntity;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -18,7 +19,7 @@ public interface PlaylistMusicsWithJpa extends JpaRepository<PlaylistMusicas, Pl
   void deleteMusicFromPlaylist(String playlistId, String musicId);
 
 
-  List<PlaylistMusicas> findByPlaylistId(String playlistId);
+  Page<PlaylistMusicas> findByPlaylistId(String playlistId, Pageable pageable);
 
 
 }

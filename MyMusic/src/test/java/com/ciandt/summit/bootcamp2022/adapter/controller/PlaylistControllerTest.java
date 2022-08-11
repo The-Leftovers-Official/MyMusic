@@ -1,5 +1,7 @@
 package com.ciandt.summit.bootcamp2022.adapter.controller;
 
+import com.ciandt.summit.bootcamp2022.entity.playlist.PlaylistMusics;
+import com.ciandt.summit.bootcamp2022.entity.playlist.PlaylistMusicsPK;
 import com.ciandt.summit.bootcamp2022.http.TokenAuthorizedClient;
 import com.ciandt.summit.bootcamp2022.http.TokenAuthorizedClientUtils;
 import com.ciandt.summit.bootcamp2022.infra.entity.artist.ArtistEntity;
@@ -23,6 +25,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 
@@ -119,6 +122,8 @@ class PlaylistControllerTest {
           "]}";
   public static final String urlTemplate = "/api/playlists/e643958a-f388-4c0c-ab90-787336a61ae1/musics";
   public static final String urlBaseTemplate = "/api/playlists/";
+
+  public static final String urlTemplateGet = "/api/playlists/e643958a-f388-4c0c-ab90-787336a61ae1";
 
   private PlaylistEntity PLAYLIST_ENTITY;
   private MusicEntity MUSIC_ENTITY;
@@ -252,5 +257,41 @@ class PlaylistControllerTest {
             .andExpect(status().isOk())
             .andExpect(jsonPath("$.message").value(returnedMessage));
   }
+
+  @Test
+  public void shouldReturn200WhenFindThePlaylist() throws Exception {
+
+     mockMvc.perform(get(urlBaseTemplate + "/" + PLAYLIST_ENTITY.getId())
+            .header("Username","Teste"))
+            .andExpect(status().isOk());
+
+  }
+
+  @Test
+  public void shouldReturn404WhenThePlaylistParamIsEmpty() throws Exception {
+
+    mockMvc.perform(get(urlBaseTemplate)
+                    .header("Username","Teste"))
+            .andExpect(status().isNotFound());
+
+  }
+
+  @Test
+  public void shouldReturn400WhenThePlaylistDoesNotExists() throws Exception {
+
+    String returnedMessage = "Playlist not found!";
+
+    mockMvc
+            .perform(get("/api/playlists/12")
+                    .header("Username", "teste")
+                    .contentType(MediaType.APPLICATION_JSON))
+                    .andExpect(status().isBadRequest())
+                    .andExpect(jsonPath("$.message").value(returnedMessage));
+
+
+  }
+
+
+
 
 }

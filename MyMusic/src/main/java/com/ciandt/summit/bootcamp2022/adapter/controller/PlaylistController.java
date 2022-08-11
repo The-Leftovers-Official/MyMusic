@@ -13,8 +13,12 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -23,7 +27,10 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.util.List;
 
+
+
 @RestController
+@Slf4j
 @RequestMapping("/api/playlists/")
 public class PlaylistController {
 
@@ -93,19 +100,29 @@ public class PlaylistController {
 
     }
 
+    @Operation(summary = "Find your playlist and the songs in your playlist")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Found the playlist ",
+                    content = @Content),
+            @ApiResponse(responseCode = "400", description = "playlist don't exists on database",
+                    content = @Content),
+            @ApiResponse(responseCode = "401", description = "Not authorized",
+                    content = @Content)})
     @GetMapping("/{playlistId}")
     public ResponseEntity<ResponseWrapper> getPlaylist(@PathVariable @NotNull @NotEmpty String playlistId,
-                                                                  @RequestHeader("Username") String username) {
+                                                       @PageableDefault(page = 0) Pageable pageable,
+                                                       @RequestHeader("Username") String username) throws IllegalArgumentException {
 
         tokenAuthorizedClient.isAuthorized(username);
 
 
-        List<PlaylistMusicas> playlistMusicas =  playlistMusicsRepository.findByPlaylistId(playlistId);
-        List<PlaylistDto> dataList = PlaylistDto.converter(playlistMusicas);
+        Page<PlaylistMusicas> playlistMusicas =  playlistMusicsRepository.findByPlaylistId(playlistId,pageable);
+        Page<PlaylistDto> dataList = PlaylistDto.converter(playlistMusicas);
 
-        if(playlistMusicas.isEmpty())
 
-            return null;
+        if (dataList.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
 
         return ResponseEntity.ok().body(new ResponseWrapper<>(dataList));
 

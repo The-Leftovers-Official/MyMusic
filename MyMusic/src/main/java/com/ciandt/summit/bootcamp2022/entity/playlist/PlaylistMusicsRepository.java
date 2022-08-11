@@ -2,8 +2,8 @@ package com.ciandt.summit.bootcamp2022.entity.playlist;
 
 import com.ciandt.summit.bootcamp2022.entity.music.Music;
 import com.ciandt.summit.bootcamp2022.infra.entity.playlist.PlaylistMusicas;
-
-import java.util.List;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 public interface PlaylistMusicsRepository {
 
@@ -11,5 +11,5 @@ public interface PlaylistMusicsRepository {
 
     void deleteMusicFromPlaylist(String playlistId, String musicId);
 
-    List<PlaylistMusicas> findByPlaylistId(String playlistId );
+    Page<PlaylistMusicas> findByPlaylistId(String playlistId , Pageable pageable);
 }
