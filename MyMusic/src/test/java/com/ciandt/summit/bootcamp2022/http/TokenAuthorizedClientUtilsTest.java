@@ -2,6 +2,7 @@ package com.ciandt.summit.bootcamp2022.http;
 
 
 import com.ciandt.summit.bootcamp2022.exceptions.AuthorizedHandler;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -25,15 +26,13 @@ public class TokenAuthorizedClientUtilsTest {
     @Test
     public void shouldReturnTokerServiceError(){
         Mockito.when(tokenAuthorizedClient.getToken(Mockito.any()))
-                .thenReturn(ResponseEntity.ok("123456"));
-
-        Mockito.when(tokenAuthorizedClient.getAuthorization(Mockito.any()))
-                        .thenReturn(ResponseEntity.badRequest().build());
+                .thenThrow(new AuthorizedHandler.TokenServiceException());
 
         try {
             utils.isAuthorized("user");
+            Assertions.fail();
         }catch (RuntimeException e){
-            assertThat(e.getClass()).isEqualTo(new AuthorizedHandler.TokenServiceException());
+
         }
     }
 
@@ -50,5 +49,6 @@ public class TokenAuthorizedClientUtilsTest {
         }catch (RuntimeException e){
         }
     }
+
 
 }
