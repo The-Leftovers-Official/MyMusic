@@ -1,12 +1,11 @@
 package com.ciandt.summit.bootcamp2022.adapter.controller;
 
-import com.ciandt.summit.bootcamp2022.adapter.controller.dto.DeletedMusicFromPlaylistDto;
-import com.ciandt.summit.bootcamp2022.adapter.controller.dto.MusicInformationDto;
-import com.ciandt.summit.bootcamp2022.adapter.controller.dto.ResponseWrapper;
+import com.ciandt.summit.bootcamp2022.adapter.controller.dto.*;
 import com.ciandt.summit.bootcamp2022.entity.music.Music;
 import com.ciandt.summit.bootcamp2022.entity.playlist.PlaylistRepository;
 import com.ciandt.summit.bootcamp2022.exceptions.AuthorizedHandler;
 import com.ciandt.summit.bootcamp2022.http.TokenAuthorizedClientUtils;
+import com.ciandt.summit.bootcamp2022.infra.entity.playlist.PlaylistMusicas;
 import com.ciandt.summit.bootcamp2022.repository.PlaylistMusicasImpl;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -15,12 +14,14 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.transaction.Transactional;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/playlists/")
@@ -89,6 +90,25 @@ public class PlaylistController {
         playlistMusicsRepository.deleteMusicFromPlaylist(playlistId, musicId);
 
         return ResponseEntity.ok().body(new DeletedMusicFromPlaylistDto(playlistId, musicId));
+
+    }
+
+    @GetMapping("/{playlistId}")
+    public ResponseEntity<ResponseWrapper> getPlaylist(@PathVariable @NotNull @NotEmpty String playlistId,
+                                                                  @RequestHeader("Username") String username) {
+
+        tokenAuthorizedClient.isAuthorized(username);
+
+
+        List<PlaylistMusicas> playlistMusicas =  playlistMusicsRepository.findByPlaylistId(playlistId);
+        List<PlaylistDto> dataList = PlaylistDto.converter(playlistMusicas);
+
+        if(playlistMusicas.isEmpty())
+
+            return null;
+
+        return ResponseEntity.ok().body(new ResponseWrapper<>(dataList));
+
 
     }
 }

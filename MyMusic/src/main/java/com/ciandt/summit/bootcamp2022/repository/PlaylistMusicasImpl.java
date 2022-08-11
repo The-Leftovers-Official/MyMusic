@@ -13,7 +13,10 @@ import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
 import java.util.Optional;
+
+
 
 
 @Component
@@ -62,4 +65,16 @@ public class PlaylistMusicasImpl implements PlaylistMusicsRepository {
         }
 
     }
-}
+
+
+
+    @Override
+    public List<PlaylistMusicas> findByPlaylistId(String playlistId) {
+        List<PlaylistMusicas> playlistMusicas = playlistMusicsWithJpa.findByPlaylistId(playlistId);
+        if(!playlistMusicas.isEmpty()){
+            return playlistMusicas;
+        }
+
+        throw new IllegalArgumentException("Playlist not found!");
+    }
+    }
