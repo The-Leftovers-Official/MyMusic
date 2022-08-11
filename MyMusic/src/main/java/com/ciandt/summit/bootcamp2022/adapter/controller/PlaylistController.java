@@ -8,6 +8,7 @@ import com.ciandt.summit.bootcamp2022.entity.playlist.PlaylistRepository;
 import com.ciandt.summit.bootcamp2022.exceptions.AuthorizedHandler;
 import com.ciandt.summit.bootcamp2022.http.TokenAuthorizedClientUtils;
 import com.ciandt.summit.bootcamp2022.repository.PlaylistMusicasImpl;
+import com.ciandt.summit.bootcamp2022.repository.PlaylistRepositoryImpl;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -47,7 +48,7 @@ public class PlaylistController {
                     content = @Content)})
     @PostMapping("{playlistId}/musics")
     @Transactional
-    public ResponseEntity<ResponseWrapper> addMusicToPlaylist(@Parameter(description = "Id of the playlist where you want to add a music") @PathVariable String playlistId,
+    public ResponseEntity<MusicInformationDto> addMusicToPlaylist(@Parameter(description = "Id of the playlist where you want to add a music") @PathVariable String playlistId,
                                                               @RequestBody MusicInformationDto musicInformationDto,
                                                               @Parameter(description = "Username to get authorization") @RequestHeader("Username") String username) {
 
@@ -64,7 +65,7 @@ public class PlaylistController {
         }
 
 
-        return ResponseEntity.ok(new ResponseWrapper<>(musicInformationDto));
+        return ResponseEntity.ok(musicInformationDto);
     }
 
 
