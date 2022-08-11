@@ -6,7 +6,7 @@ import org.springframework.data.domain.Pageable;
 
 public interface MusicService {
 
-  Page<MusicEntity> getMusicByNameOrArtist(String filtroMusica, String filtroArtista, Pageable pageable);
+  Page<MusicEntity> getMusicByNameOrArtist(String filterMusic, String filterArtist, Pageable pageable);
 
   Page<MusicEntity> getAllData(Pageable pageable);
 
