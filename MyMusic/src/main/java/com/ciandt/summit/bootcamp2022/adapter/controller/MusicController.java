@@ -50,24 +50,24 @@ public class MusicController {
                     content = @Content)})
     @GetMapping
     @Cacheable(value = "listOfMusicByNameOrArtist")
-    public ResponseEntity<ResponseWrapper> getMusicByNameOrArtist(@Parameter(description = "filter can be name of the music or artist") @RequestParam(required = false) String filtro,
+    public ResponseEntity<ResponseWrapper> getMusicByNameOrArtist(@Parameter(description = "filter can be name of the music or artist") @RequestParam(required = false) String filter,
                                                                   @PageableDefault(page = 0) Pageable pageable,
                                                                   @RequestHeader("Username") String username) {
 
         tokenAuthorizedClient.isAuthorized(username);
 
 
-        if (filtro == null || filtro.isEmpty()) {
+        if (filter == null || filter.isEmpty()) {
             log.info("Search without parameters accomplish.");
             return ResponseEntity.ok().body(new ResponseWrapper(MusicDto.converter(musicService.getAllData(pageable))));
         }
 
-        if (filtro.length() < 2) {
+        if (filter.length() < 2) {
             log.error("The filter parameter must be equal or greater than 2.");
             throw new IllegalArgumentException( "The filter parameter must be equal or greater than 2.");
         }
 
-        Page<MusicEntity> musicEntityPage = musicService.getMusicByNameOrArtist(filtro, filtro, pageable);
+        Page<MusicEntity> musicEntityPage = musicService.getMusicByNameOrArtist(filter, filter, pageable);
 
         Page<MusicDto> dataList = MusicDto.converter(musicEntityPage);
 
