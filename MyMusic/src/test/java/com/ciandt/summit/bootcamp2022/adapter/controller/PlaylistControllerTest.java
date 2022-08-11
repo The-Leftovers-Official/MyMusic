@@ -123,7 +123,6 @@ class PlaylistControllerTest {
   public static final String urlTemplate = "/api/playlists/e643958a-f388-4c0c-ab90-787336a61ae1/musics";
   public static final String urlBaseTemplate = "/api/playlists/";
 
-  public static final String urlTemplateGet = "/api/playlists/e643958a-f388-4c0c-ab90-787336a61ae1";
 
   private PlaylistEntity PLAYLIST_ENTITY;
   private MusicEntity MUSIC_ENTITY;
