@@ -11,9 +11,13 @@ import com.ciandt.summit.bootcamp2022.infra.entity.playlist.PlaylistMusicsPKEnti
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
 
 import java.util.Optional;
+
+
 
 
 @Component
@@ -62,4 +66,16 @@ public class PlaylistMusicasImpl implements PlaylistMusicsRepository {
         }
 
     }
-}
+
+
+
+    @Override
+    public Page<PlaylistMusicas> findByPlaylistId(String playlistId, Pageable pageable) {
+        Page<PlaylistMusicas> playlistMusicas = playlistMusicsWithJpa.findByPlaylistId(playlistId,pageable);
+        if(!playlistMusicas.isEmpty()){
+            return playlistMusicas;
+        }
+
+        throw new IllegalArgumentException("Playlist not found!");
+    }
+    }
