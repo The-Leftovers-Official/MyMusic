@@ -215,9 +215,10 @@ https://sqlitestudio.pl/index.rvt
 
 https://sqlitebrowser.org/dl/
 <br>
-
+<div align="center">
 <h1 id="testes"> Testes </h1>
 
 <p> A cobertura de testes atual é de 84% das Classes, 66% dos Métodos e 70% das Linhas.</p>
 
 ![Testes](https://github.com/gabrielbillVG/mymusicfiles/blob/main/mymusiccovertest.png)
+    </div>
