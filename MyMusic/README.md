@@ -27,7 +27,7 @@
 <h3 id="sobre"> Sobre o Projeto My Music </h3>
 <p id="sobre"> O Projeto My Music 2022 é um sistema gerenciador de músicas utilizado para o Bootcamp de desenvolvedores Jr. da CI&T.
 O objetivo do projeto é desenvolver uma api que gerencie as musicas favoritas do usuário por meio de uma playlist individual personalizável.</p>
-
+<br>
 <br>
 <h3 id="tecnologias"> Tecnologias Utilizadas no Projeto My Music </h3>
 <p> Optamos pela metodologia Clean Architecture como padrão de organização do código. Por default, o projeto utiliza Java 11, Spring Boot e Maven. Escolhemos utilizar a biblioteca Lombok para simplificar e deixar o código mais limpo. Para documentação, escolhemos o Swagger por sua praticidade e vasta documentação.</p>
