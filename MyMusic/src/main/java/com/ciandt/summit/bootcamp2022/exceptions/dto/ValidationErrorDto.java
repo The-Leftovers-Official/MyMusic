@@ -1,0 +1,16 @@
+package com.ciandt.summit.bootcamp2022.exceptions.dto;
+
+
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
+public class ValidationErrorDto {
+
+    private String message;
+}
